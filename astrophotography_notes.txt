@@ -1,3 +1,8 @@
 sudo apt-get install fswebcam
 
 fswebcam -r 640x480 --jpeg 85 -D 1 web-cam-shot.jpg
+
+git clone https://github.com/igetit41/astrophotography.git
+
+git fetch
+git merge
