@@ -6,7 +6,7 @@ fileformat=.jpg
 while [true]
 do
     # Timestamp
-    stamp=date +"%yyyy-%mm-%dd-%hh-%mm-%ss"
+    stamp=$(date +"%Y-%m-%d-%H-%M-%S")
     name=$stamp$fileformat
 
     # Take a pic
