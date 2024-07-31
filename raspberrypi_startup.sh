@@ -8,8 +8,8 @@ git -C ~/astrophotography restore .
 git -C ~/astrophotography fetch
 git -C ~/astrophotography merge
 
-sudo chmod +x ~/astrophotography/astrophotography.sh
-sudo cp ~/astrophotography/astrophotography.service /etc/systemd/system/astrophotography.service
+sudo chmod +x /home/d3/astrophotography/astrophotography.sh
+sudo cp /home/d3/astrophotography/astrophotography.service /etc/systemd/system/astrophotography.service
 
 # Restart Server
 sudo systemctl enable astrophotography
