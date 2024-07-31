@@ -8,6 +8,8 @@ git fetch
 git merge
 
 
+Restart=on-failure
+
 cd ~
 git clone https://github.com/igetit41/osteboys-docker-mcserver
 sudo chmod +x ~/osteboys-docker-mcserver/minecraftserver/minecraftserver.sh
