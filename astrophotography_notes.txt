@@ -4,7 +4,9 @@ sudo apt install v4l-utils -y
 
 v4l2-ctl --list-devices
 v4l2-ctl -d 2 --list-formats --list-ctrls
-
+v4l2-ctl --list-ctrls-menus
+v4l2-ctl -c brightness=64
+v4l2-ctl -c contrast=65
 
 fswebcam -r 640x480 --jpeg 85 -D 1 web-cam-shot.jpg
 fswebcam -r 3264x2448 --jpeg 85 -D 1 web-cam-shot.jpg
