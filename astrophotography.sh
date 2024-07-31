@@ -1,10 +1,10 @@
 #!/bin/bash
 
 pic_timer=300
-fileformat=.png
+fileformat=.jpg
 
-while [true]
-do
+#while [true]
+#do
     # Timestamp
     stamp=$(date +"%Y-%m-%d-%H-%M-%S")
     name=$stamp$fileformat
@@ -15,4 +15,4 @@ do
 
     # Sleep
     sleep $pic_timer
-done
+#done
