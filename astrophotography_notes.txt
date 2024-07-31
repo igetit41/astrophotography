@@ -24,3 +24,6 @@ Restart=on-failure
 
 chmod +x ~/astrophotography/raspberrypi_startup.sh
 crontab -e @reboot ~/astrophotography/raspberrypi_startup.sh
+
+
+service astrophotography status
