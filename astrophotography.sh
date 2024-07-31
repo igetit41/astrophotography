@@ -4,8 +4,8 @@ pic_timer=60
 fileformat=.jpg
 fileformat_arg=--jpeg 85
 
-#while [true]
-#do
+while [true]
+do
     # Timestamp
     stamp=$(date +"%Y-%m-%d-%H-%M-%S")
 
@@ -15,4 +15,4 @@ fileformat_arg=--jpeg 85
 
     # Sleep
     sleep $pic_timer
-#done
+done
