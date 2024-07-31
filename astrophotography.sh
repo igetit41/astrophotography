@@ -1,7 +1,7 @@
 #!/bin/bash
 pic_timer=60
 fileformat=.jpg
-device=$(v4l2-ctl --list-devices | grep -i 'FIBONAX Nova800' -A 1)
+device=$(v4l2-ctl --list-devices | grep -i 'FIBONAX Nova800' -A 1 | grep -i '/dev/video')
 
 while true; do
     # Timestamp
