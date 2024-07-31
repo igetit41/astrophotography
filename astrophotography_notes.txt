@@ -27,3 +27,9 @@ crontab -e @reboot ~/astrophotography/raspberrypi_startup.sh
 
 
 service astrophotography status
+
+
+storage.buckets.list
+storage.folders.create
+storage.objects.create
+
