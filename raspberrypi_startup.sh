@@ -1,7 +1,7 @@
 #!/bin/bash
 # Update
 sudo apt update -y
-sudo apt-get install fswebcam
+sudo apt-get install fswebcam -y
 
 git -C ~/astrophotography fetch
 git -C ~/astrophotography merge
