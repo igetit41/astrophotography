@@ -37,6 +37,8 @@ curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-
 tar -xf google-cloud-cli-linux-x86_64.tar.gz
 ./google-cloud-sdk/install.sh
 ./google-cloud-sdk/bin/gcloud init
+source '/home/d3/google-cloud-sdk/path.bash.inc'
+source '/home/d3/google-cloud-sdk/completion.bash.inc'
 
 
 
