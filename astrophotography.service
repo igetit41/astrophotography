@@ -1,0 +1,11 @@
+[Unit]
+Description=astrophotography
+
+[Service]
+User=root
+WorkingDirectory=/home/d3/astrophotography
+ExecStart=/home/d3/astrophotography/astrophotography.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

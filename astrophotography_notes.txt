@@ -6,3 +6,15 @@ git clone https://github.com/igetit41/astrophotography.git
 
 git fetch
 git merge
+
+
+cd ~
+git clone https://github.com/igetit41/osteboys-docker-mcserver
+sudo chmod +x ~/osteboys-docker-mcserver/minecraftserver/minecraftserver.sh
+
+sudo cp ~/osteboys-docker-mcserver/minecraftserver/minecraftserver.service /etc/systemd/system/minecraftserver.service
+
+sudo systemctl enable minecraftserver
+sudo systemctl restart minecraftserver
+
+
