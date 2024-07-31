@@ -11,19 +11,14 @@ fswebcam -r 3264x2448 --jpeg 85 -D 1 web-cam-shot.jpg
 
 git clone https://github.com/igetit41/astrophotography.git
 
-git fetch
-git merge
+export workdir=~/astrophotography
+git -C $workdir restore .
+git -C $workdir fetch
+git -C $workdir merge
 
 
 Restart=on-failure
 
-cd ~
-git clone https://github.com/igetit41/osteboys-docker-mcserver
-sudo chmod +x ~/osteboys-docker-mcserver/minecraftserver/minecraftserver.sh
 
-sudo cp ~/osteboys-docker-mcserver/minecraftserver/minecraftserver.service /etc/systemd/system/minecraftserver.service
-
-sudo systemctl enable minecraftserver
-sudo systemctl restart minecraftserver
-
-
+chmod +x ~/astrophotography/raspberrypi_startup.sh
+crontab -e @reboot ~/astrophotography/raspberrypi_startup.sh
