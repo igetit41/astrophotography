@@ -6,6 +6,8 @@ device=$(v4l2-ctl --list-devices | grep -i 'FIBONAX Nova800' -A 1 | grep -i '/de
 foldername=$(date +"%Y-%m-%d-%H-%M-%S")
 mkdir -p ./photos/$foldername
 
+export PATH="/home/d3/google-cloud-sdk/bin:$PATH"
+
 while true; do
     # Timestamp
     stamp=$(date +"%Y-%m-%d-%H-%M-%S")
@@ -15,9 +17,9 @@ while true; do
     fswebcam -d $device -r 3264x2448 --png 9 ./photos/$foldername/$stamp$fileformat --no-banner
 
     # Upload to Cloud Storage
-    echo gcloud storage cp ./photos/$foldername/$stamp$fileformat gs://sandcastle-401716-photos/$foldername/$stamp$fileformat
-    #upload=$(gcloud storage cp ./photos/$foldername/$stamp$fileformat gs://sandcastle-401716-photos/$foldername/$stamp$fileformat)
-    #echo "$upload"
+    echo "gcloud storage cp ./photos/$foldername/$stamp$fileformat gs://sandcastle-401716-photos/$foldername/$stamp$fileformat"
+    upload=$(gcloud storage cp ./photos/$foldername/$stamp$fileformat gs://sandcastle-401716-photos/$foldername/$stamp$fileformat)
+    echo "$upload"
 
     # Sleep
     sleep $pic_timer
