@@ -7,6 +7,8 @@ foldername=$(date +"%Y-%m-%d-%H-%M-%S")
 mkdir -p ./photos/$foldername
 
 export PATH="/home/d3/google-cloud-sdk/bin:$PATH"
+setaccount=(gcloud config set account photos-push@sandcastle-401716.iam.gserviceaccount.com)
+echo "$setaccount"
 
 while true; do
     # Timestamp
