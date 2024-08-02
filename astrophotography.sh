@@ -15,7 +15,7 @@ sudo chmod +x $path_to_gcloud_auth/gcloud_auth.sh
 glcoud_auth=$(/bin/bash $path_to_gcloud_auth/gcloud_auth.sh)
 echo "glcoud_auth: $glcoud_auth"
 
-#service_account=photos-push@sandcastle-401716.iam.gserviceaccount.com
+service_account=photos-push@sandcastle-401716.iam.gserviceaccount.com
 #activate_account=(gcloud auth activate-service-account --key-file=./$service_account_keyfile_name --project=$service_account_project)
 #echo "$activate_account"
 
