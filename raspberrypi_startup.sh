@@ -1,8 +1,8 @@
 #!/bin/bash
 # Update
-sudo apt update -y
-sudo apt-get install fswebcam -y
-sudo apt install v4l-utils -y
+#sudo apt update -y
+#sudo apt-get install fswebcam -y
+#sudo apt install v4l-utils -y
 
 git -C ~/astrophotography restore .
 git -C ~/astrophotography fetch
