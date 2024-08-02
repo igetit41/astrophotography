@@ -1,11 +1,6 @@
 #!/bin/bash
 
-while getopts gcloud_command: flag
-do
-    case "${flag}" in
-        gcloud_command) gcloud_command=${OPTARG};;
-    esac
-done
+gcloud_command=$1
 echo "gcloud_command: $gcloud_command"
 
 #Copy this whole folder one directory up, add the json keyfile, and replace the following variables.
