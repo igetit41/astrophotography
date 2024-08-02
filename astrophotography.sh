@@ -7,8 +7,8 @@ device=$(v4l2-ctl --list-devices | grep -i 'FIBONAX Nova800' -A 1 | grep -i '/de
 foldername=$(date +"%Y-%m-%d-%H-%M-%S")
 mkdir -p ./photos/$foldername
 
-#path_to_google_cloud_sdk=/home/d3
-#export PATH="$path_to_google_cloud_sdk/google-cloud-sdk/bin:$PATH"
+path_to_google_cloud_sdk=/home/d3
+export PATH="$path_to_google_cloud_sdk/google-cloud-sdk/bin:$PATH"
 
 path_to_gcloud_auth=../gcloud_auth
 sudo chmod +x $path_to_gcloud_auth/gcloud_auth.sh
