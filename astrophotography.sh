@@ -27,11 +27,11 @@ while true; do
     fswebcam -d $device -r 3264x2448 --png 9 ./photos/$foldername/$stamp$fileformat --no-banner
 
     # Upload to Cloud Storage
-    echo "gcloud_upload: gcloud storage cp ./photos/$foldername/$stamp$fileformat gs://sandcastle-401716-photos/$foldername/$stamp$fileformat"
-    #upload=$(gcloud storage cp ./photos/$foldername/$stamp$fileformat gs://sandcastle-401716-photos/$foldername/$stamp$fileformat)
     gcloud_upload="gcloud storage cp ./photos/$foldername/$stamp$fileformat gs://sandcastle-401716-photos/$foldername/$stamp$fileformat"
+    echo "gcloud_upload: $gcloud_upload"
+    
     upload=$(/bin/bash $path_to_gcloud_auth/gcloud_auth.sh -gcloud_command "$gcloud_upload")
-    echo "$upload"
+    echo "upload: $upload"
 
     # Sleep
     sleep $pic_timer
