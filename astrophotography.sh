@@ -30,7 +30,7 @@ while true; do
     gcloud_upload="gcloud storage cp ./photos/$foldername/$stamp$fileformat gs://sandcastle-401716-photos/$foldername/$stamp$fileformat"
     echo "gcloud_upload: $gcloud_upload"
     
-    upload=$(/bin/bash $path_to_gcloud_auth/gcloud_auth.sh -gcloud_command "$gcloud_upload")
+    upload=$(/bin/bash $path_to_gcloud_auth/gcloud_auth.sh "$gcloud_upload")
     echo "upload: $upload"
 
     # Sleep
