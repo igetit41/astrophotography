@@ -4,9 +4,11 @@ pic_timer=60
 fileformat=.png
 device=$(v4l2-ctl --list-devices | grep -i 'FIBONAX Nova800' -A 1 | grep -i '/dev/video')
 foldername=$(date +"%Y-%m-%d-%H-%M-%S")
+path_to_google_cloud_sdk=/home/d3
+path_to_gcloud_auth=../gcloud_auth
 mkdir -p ./photos/$foldername
 
-path_to_gcloud_auth=../gcloud_auth
+export PATH="$path_to_google_cloud_sdk/google-cloud-sdk/bin:$PATH"
 
 set_auth_executable=(sudo chmod +x $path_to_gcloud_auth/gcloud_auth.sh)
 echo "set_auth_executable: $set_auth_executable"
