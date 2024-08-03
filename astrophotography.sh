@@ -1,5 +1,6 @@
 #!/bin/bash
-pic_timer=60
+#pic_timer=60
+pic_timer=5
 fileformat=.png
 path_to_gcloud_auth=../gcloud_auth
 gsbucke=gs://sandcastle-401716-photos
