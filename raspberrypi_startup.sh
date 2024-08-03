@@ -14,7 +14,7 @@ while [[ $? != 0 && $cycle < $wait_cycles ]]; do
   ping -c 1 -q google.com >&/dev/null
 done
 
-
+echo "ping: $?"
 if [ $? == 0 ]; then
   git -C ~/astrophotography restore .
   git -C ~/astrophotography fetch
