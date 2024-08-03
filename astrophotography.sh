@@ -24,10 +24,11 @@ while true; do
     echo "gcloud_upload: $gcloud_upload"
 
     upload=$(/bin/bash $path_to_gcloud_auth/gcloud_auth.sh "$gcloud_upload")
-    echo "upload: $upload"
 
     if [[ $upload =~ 'ERROR:' ]]; then
+        echo "upload: $upload"
     else
+        echo "upload: $upload"
         # Remove local copy
         rm ./photos/$foldername/$stamp$fileformat
     fi
