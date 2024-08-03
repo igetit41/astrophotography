@@ -26,6 +26,10 @@ git -C $workdir merge
 
 Restart=on-failure
 
+hostname -I
+
+sudo touch /boot/firmware/ssh
+
 
 chmod +x ~/astrophotography/raspberrypi_startup.sh
 crontab -e @reboot ~/astrophotography/raspberrypi_startup.sh
