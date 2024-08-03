@@ -22,9 +22,12 @@ while true; do
     # Upload to Cloud Storage
     gcloud_upload="gcloud storage cp ../astrophotography/photos/$foldername/$stamp$fileformat gs://sandcastle-401716-photos/$foldername/$stamp$fileformat"
     echo "gcloud_upload: $gcloud_upload"
-    
+
     upload=$(/bin/bash $path_to_gcloud_auth/gcloud_auth.sh "$gcloud_upload")
     echo "upload: $upload"
+
+    # Remove local copy
+    rm ../astrophotography/photos/$foldername/$stamp$fileformat
 
     # Sleep
     sleep $pic_timer
