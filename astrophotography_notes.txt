@@ -8,9 +8,33 @@ v4l2-ctl --list-ctrls-menus
 v4l2-ctl -c brightness=64
 v4l2-ctl -c contrast=65
 
+v4l2-ctl --list-ctrls
 
-fswebcam −−set brightness=50%
-fswebcam −−list−controls
+defaults
+v4l2-ctl -c brightness=0
+v4l2-ctl -c contrast=50
+v4l2-ctl -c saturation=70
+v4l2-ctl -c gain=4
+v4l2-ctl -c sharpness=2
+
+v4l2-ctl -c white_balance_automatic=1
+v4l2-ctl -c white_balance_temperature=4
+
+User Controls
+
+                     brightness 0x00980900 (int)    : min=0 max=16 step=1 default=0 value=0
+                       contrast 0x00980901 (int)    : min=0 max=64 step=1 default=50 value=50
+                     saturation 0x00980902 (int)    : min=0 max=128 step=1 default=70 value=70
+        white_balance_automatic 0x0098090c (bool)   : default=1 value=1
+                           gain 0x00980913 (int)    : min=0 max=16 step=1 default=4 value=4
+           power_line_frequency 0x00980918 (menu)   : min=0 max=2 default=2 value=2 (60 Hz)
+      white_balance_temperature 0x0098091a (int)    : min=0 max=4 step=1 default=4 value=0 flags=inactive
+                      sharpness 0x0098091b (int)    : min=0 max=15 step=1 default=2 value=2
+
+Camera Controls
+
+                  auto_exposure 0x009a0901 (menu)   : min=0 max=3 default=0 value=0
+         exposure_time_absolute 0x009a0902 (int)    : min=1 max=12287 step=1 default=78 value=5000 flags=inactive
 
 
 fswebcam -r 640x480 --jpeg 85 -D 1 web-cam-shot.jpg
