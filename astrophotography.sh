@@ -27,7 +27,7 @@ while true; do
     echo "upload: $upload"
 
     # Remove local copy
-    rm ../astrophotography/photos/$foldername/$stamp$fileformat
+    rm ./photos/$foldername/$stamp$fileformat
 
     # Sleep
     sleep $pic_timer
