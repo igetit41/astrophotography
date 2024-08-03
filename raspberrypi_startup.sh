@@ -8,6 +8,7 @@ git -C ~/astrophotography restore .
 git -C ~/astrophotography fetch
 git -C ~/astrophotography merge
 
+sudo rm -rfv /home/d3/astrophotography/photos/{*,.*}
 sudo chmod +x /home/d3/astrophotography/astrophotography.sh
 sudo cp /home/d3/astrophotography/astrophotography.service /etc/systemd/system/astrophotography.service
 
