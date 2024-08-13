@@ -4,7 +4,8 @@ Description=astrophotography
 [Service]
 User=root
 WorkingDirectory=/home/d3/astrophotography
-ExecStart=/home/d3/astrophotography/astrophotography.sh
+EnvironmentFile=/home/d3/astrophotography/serviceConf.txt
+ExecStart=/home/d3/astrophotography/astrophotography.sh ${ARG1} ${ARG2}
 
 [Install]
 WantedBy=multi-user.target

@@ -1,16 +1,7 @@
 #!/bin/bash
-pic_timer=60
-#pic_timer=5
-fileformat=.png
+
 path_to_gcloud_auth=../gcloud_auth
-gsbucke=gs://sandcastle-401716-photos
-device=$(v4l2-ctl --list-devices | grep -i 'FIBONAX Nova800' -A 1 | grep -i '/dev/video')
-
-foldername=$(date +"%Y-%m-%d-%H-%M-%S")
-mkdir -p ./photos/$foldername
-
-echo "ARG1: $1"
-echo "ARG2: $2"
+gsbucket=gs://sandcastle-401716-photos
 
 while true; do
     # Timestamp
