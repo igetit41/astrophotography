@@ -17,11 +17,6 @@ while true; do
     stamp=$(date +"%Y-%m-%d-%H-%M-%S")
 
     # Take a pic
-    echo "device: $1"
-    echo "device_command: $device_command"
-    echo "device: $device"
-    echo "resolution: $2"
-    echo "resolution: $resolution"
     fswebcam -d $device -r $resolution --png 9 ./photos/$foldername/$stamp$fileformat --no-banner
 
     # Upload to Cloud Storage
@@ -39,6 +34,11 @@ while true; do
         # Remove local copy
         #rm ./photos/$foldername/$stamp$fileformat
     fi
+    echo "device: $1"
+    echo "device_command: $device_command"
+    echo "device: $device"
+    echo "resolution: $2"
+    echo "resolution: $resolution"
 
     # Sleep
     sleep $pic_timer
