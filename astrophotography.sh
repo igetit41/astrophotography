@@ -4,16 +4,16 @@ pic_timer=60
 fileformat=.png
 path_to_gcloud_auth=../gcloud_auth
 gsbucke=gs://sandcastle-401716-photos
-device=$(v4l2-ctl --list-devices | grep -i 'USB 2.0 Camera' -A 1 | grep -i '/dev/video')
-resolution=1920x1080
-#device=$(v4l2-ctl --list-devices | grep -i 'FIBONAX Nova800' -A 1 | grep -i '/dev/video')
-#resolution=3264x2448
-
-foldername=$(date +"%Y-%m-%d-%H-%M-%S")
-mkdir -p ./photos/$foldername
 
 echo "ARG1: $1"
 echo "ARG2: $2"
+device=$(v4l2-ctl --list-devices | grep -i 'USB 2.0 Camera' -A 1 | grep -i '/dev/video')
+resolution=1920x1080
+#device=$(v4l2-ctl --list-devices | grep -i '$1' -A 1 | grep -i '/dev/video')
+#resolution=$2
+
+foldername=$(date +"%Y-%m-%d-%H-%M-%S")
+mkdir -p ./photos/$foldername
 
 while true; do
     # Timestamp
@@ -24,7 +24,8 @@ while true; do
     fswebcam -d $device -r $resolution --png 9 ./photos/$foldername/$stamp$fileformat --no-banner
 
     # Upload to Cloud Storage
-    gcloud_upload="gcloud storage cp ../astrophotography/photos/$foldername/$stamp$fileformat $gsbucket/$foldername/$stamp$fileformat"
+    #gcloud_upload="gcloud storage cp ../astrophotography/photos/$foldername/$stamp$fileformat $gsbucket/$foldername/$stamp$fileformat"
+    gcloud_upload="gsutil cp ../astrophotography/photos/$foldername/$stamp$fileformat $gsbucket/$foldername/$stamp$fileformat"
     echo "gcloud_upload: $gcloud_upload"
 
     # Pass gcloud upload command to gcloud_auth.sh
