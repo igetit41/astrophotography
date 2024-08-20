@@ -10,6 +10,9 @@ gsbucket=sandcastle-401716-photos
 #device_resultx=$(v4l2-ctl --list-devices | grep -i $1 -A 1 | grep -i '/dev/video')
 #resolution=$2
 
+#device_result=$(v4l2-ctl --list-devices | grep -i 'FIBONAX Nova800' -A 1 | grep -i '/dev/video')
+#resolution=3264x2448
+
 device_result=$(v4l2-ctl --list-devices | grep -i 'USB 2.0 Camera' -A 1 | grep -i '/dev/video')
 resolution=1920x1080
 
