@@ -6,7 +6,7 @@ path_to_gcloud_auth=../gcloud_auth
 gsbucket=sandcastle-401716-photos
 
 device_command="v4l2-ctl --list-devices | grep -i '${1}' -A 1 | grep -i '/dev/video'"
-device_resultx=$($device_command)
+device_resultx=$(${device_command})
 
 device_result=$(v4l2-ctl --list-devices | grep -i 'USB 2.0 Camera' -A 1 | grep -i '/dev/video')
 resolution=$2
@@ -38,7 +38,7 @@ while true; do
     fi
     echo "ARG1: $1"
     echo "device_command: $device_command"
-    #echo "device_resultx: $device_resultx"
+    echo "device_resultx: $device_resultx"
 
     # Sleep
     sleep $pic_timer
