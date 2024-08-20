@@ -17,7 +17,9 @@ while true; do
 
     # Take a pic
     echo "device: $1"
+    echo "device: $device"
     echo "resolution: $2"
+    echo "resolution: $resolution"
     fswebcam -d $device -r $resolution --png 9 ./photos/$foldername/$stamp$fileformat --no-banner
 
     # Upload to Cloud Storage
