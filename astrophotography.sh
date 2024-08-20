@@ -38,7 +38,7 @@ while true; do
     fi
     echo "ARG1: $1"
     echo "device_command: $device_command"
-    echo "device_resultx: $device_resultx"
+    #echo "device_resultx: $device_resultx"
 
     # Sleep
     sleep $pic_timer
