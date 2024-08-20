@@ -16,6 +16,8 @@ while true; do
     stamp=$(date +"%Y-%m-%d-%H-%M-%S")
 
     # Take a pic
+    echo "device: $1"
+    echo "resolution: $2"
     fswebcam -d $device -r $resolution --png 9 ./photos/$foldername/$stamp$fileformat --no-banner
 
     # Upload to Cloud Storage
