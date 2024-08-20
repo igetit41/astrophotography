@@ -75,6 +75,9 @@ tar -xf google-cloud-cli-linux-x86_64.tar.gz
 source '/home/d3/google-cloud-sdk/path.bash.inc'
 source '/home/d3/google-cloud-sdk/completion.bash.inc'
 
+ARG1='FIBONAX Nova800'
+ARG2=3264x2448
 
-
+ARG1='USB 2.0 Camera'
+ARG2=1920x1080
 
