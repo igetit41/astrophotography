@@ -5,8 +5,7 @@ fileformat=.png
 path_to_gcloud_auth=../gcloud_auth
 gsbucket=sandcastle-401716-photos
 
-device_command="v4l2-ctl --list-devices | grep -i 'USB 2.0 Camera' -A 1 | grep -i '/dev/video'"
-device=$($device_command)
+device=$(v4l2-ctl --list-devices | grep -i 'USB 2.0 Camera' -A 1 | grep -i '/dev/video')
 resolution=$2
 
 foldername=$(date +"%Y-%m-%d-%H-%M-%S")
