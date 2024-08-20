@@ -36,7 +36,7 @@ while true; do
     else
         echo "upload: $upload"
         # Remove local copy
-        rm ./photos/$foldername/$stamp$fileformat
+        #rm ./photos/$foldername/$stamp$fileformat
     fi
 
     # Sleep
