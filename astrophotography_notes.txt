@@ -10,6 +10,8 @@ v4l2-ctl -c contrast=65
 
 v4l2-ctl --list-ctrls
 
+watch -n 1 systemctl status astrophotography.service
+
 defaults
 v4l2-ctl -c brightness=0
 v4l2-ctl -c contrast=50
