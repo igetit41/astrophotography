@@ -34,7 +34,7 @@ while true; do
         #rm ./photos/$foldername/$stamp$fileformat
     fi
     echo "device: $1"
-    echo "device_command: $device_command"
+    #echo "device_command: $device_command"
     echo "device: $device"
     echo "resolution: $2"
     echo "resolution: $resolution"
