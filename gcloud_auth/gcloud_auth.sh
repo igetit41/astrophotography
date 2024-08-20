@@ -17,7 +17,7 @@ if [[ $set_account != '' ]]; then
     echo "set_account: $set_account"
 fi
 
-activate_account=$(gcloud auth activate-service-account --key-file=$path_to_git/gcloud_auth/$service_account_keyfile_name --project=$service_account_project)
+activate_account=$(gcloud auth activate-service-account --key-file=$path_to_gcloud_auth/gcloud_auth/$service_account_keyfile_name --project=$service_account_project)
 if [[ $activate_account != '' ]]; then
     echo "activate_account: $activate_account"
 fi
