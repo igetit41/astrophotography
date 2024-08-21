@@ -40,5 +40,5 @@ sudo systemctl enable astrophotography
 sudo systemctl restart astrophotography
 
 device_result=$(v4l2-ctl --list-devices | grep -i 'USB 2.0 Camera' -A 1 | grep -i '/dev/video' | xargs)
-cvlc_result=$(nohup cvlc -f v4l2://$device_result &)
+nohup cvlc -f v4l2://$device_result &
 
