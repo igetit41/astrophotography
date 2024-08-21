@@ -12,7 +12,7 @@ v4l2-ctl --list-ctrls
 
 watch -n 1 systemctl status -n 30 astrophotography.service
 
-vlc v4l2:///dev/video0
+cvlc -f v4l2:///dev/video0
 
 defaults
 v4l2-ctl -c brightness=0
