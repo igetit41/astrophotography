@@ -39,6 +39,6 @@ sudo chmod +x $objective_path/gcloud_auth/gcloud_auth.sh
 sudo systemctl enable astrophotography
 sudo systemctl restart astrophotography
 
-device_result=$(v4l2-ctl --list-devices | grep -i 'USB 2.0 Camera' -A 1 | grep -i '/dev/video' | xargs)
-nohup cvlc -f v4l2://$device_result &
+#device_result=$(v4l2-ctl --list-devices | grep -i 'USB 2.0 Camera' -A 1 | grep -i '/dev/video' | xargs)
+#nohup cvlc -f v4l2://$device_result &
 
