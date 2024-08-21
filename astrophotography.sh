@@ -16,7 +16,7 @@ gsbucket=sandcastle-401716-photos
 device_result=$(v4l2-ctl --list-devices | grep -i 'USB 2.0 Camera' -A 1 | grep -i '/dev/video' | xargs)
 resolution=1920x1080
 
-cvlc -f v4l2://$device_result
+cvlc -f v4l2://$device_result &
 
 foldername=$(date +"%Y-%m-%d-%H-%M-%S")
 mkdir -p ./photos/$foldername
