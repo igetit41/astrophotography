@@ -35,14 +35,7 @@ while true; do
 
     # Pass gcloud upload command to gcloud_auth.sh
     upload=$(/bin/bash $path_to_gcloud_auth/gcloud_auth.sh "$gcloud_upload")
-
-    if [[ $upload =~ 'ERROR:' ]]; then
-        echo "ERROR: $upload"
-    else
-        echo "upload: $upload"
-        # Remove local copy
-        rm ./photos/$foldername/$stamp$fileformat
-    fi
+    
     #echo "ARG1: $1"
     #echo "device_command: $device_command"
     #echo "device_resultx: $device_resultx"
@@ -50,4 +43,10 @@ while true; do
 
     # Sleep
     sleep $pic_timer
+
+    if [[ $upload =~ 'ERROR:' ]]; then
+        echo "ERROR: $upload"
+    else
+        rm ./photos/$foldername/$stamp$fileformat
+    fi
 done
