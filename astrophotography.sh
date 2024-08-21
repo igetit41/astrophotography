@@ -10,11 +10,13 @@ gsbucket=sandcastle-401716-photos
 #device_resultx=$(v4l2-ctl --list-devices | grep -i $1 -A 1 | grep -i '/dev/video')
 #resolution=$2
 
-#device_result=$(v4l2-ctl --list-devices | grep -i 'FIBONAX Nova800' -A 1 | grep -i '/dev/video')
+#device_result=$(v4l2-ctl --list-devices | grep -i 'FIBONAX Nova800' -A 1 | grep -i '/dev/video' | xargs)
 #resolution=3264x2448
 
-device_result=$(v4l2-ctl --list-devices | grep -i 'USB 2.0 Camera' -A 1 | grep -i '/dev/video')
+device_result=$(v4l2-ctl --list-devices | grep -i 'USB 2.0 Camera' -A 1 | grep -i '/dev/video' | xargs)
 resolution=1920x1080
+
+cvlc -f v4l2://$device_result
 
 foldername=$(date +"%Y-%m-%d-%H-%M-%S")
 mkdir -p ./photos/$foldername
@@ -44,7 +46,7 @@ while true; do
     #echo "ARG1: $1"
     #echo "device_command: $device_command"
     #echo "device_resultx: $device_resultx"
-    #echo "device_result: $device_result"
+    echo "device_result: $device_result"
 
     # Sleep
     sleep $pic_timer
