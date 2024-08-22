@@ -27,7 +27,7 @@ while true; do
     stamp=$(date +"%Y-%m-%d-%H-%M-%S")
 
     # Take a pic
-    fswebcam -d $device_result -r $resolution --png 9 --no-banner -D 5 --save ./photos/$foldername/$stamp$fileformat
+    fswebcam -d $device_result -r $resolution --png 9 --no-banner -D 10 --save ./photos/$foldername/$stamp$fileformat
 
     # Upload to Cloud Storage
     #gcloud_upload="gcloud storage cp ../astrophotography/photos/$foldername/$stamp$fileformat $gsbucket/$foldername/$stamp$fileformat"
