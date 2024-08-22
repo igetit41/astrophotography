@@ -39,7 +39,7 @@ while true; do
 
     nohup eom -f ./photos/$foldername/$stamp$fileformat &
     
-    #echo "auto_exposure_result: $auto_exposure_result"
+    echo "auto_exposure_result: $auto_exposure_result"
 
     # Sleep
     sleep $pic_timer
