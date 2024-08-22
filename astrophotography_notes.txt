@@ -115,6 +115,7 @@ v4l2-ctl -d /dev/video0 -c gain=50
 v4l2-ctl -d /dev/video0 -c contrast=32
 
 
+v4l2-ctl -d /dev/video0 -c auto_exposure=1 -c exposure_time_absolute=5000 -c brightness=30 -c gain=50 -c contrast=32
 
 
 sudo apt-get install fswebcam -y
