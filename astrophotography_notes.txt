@@ -1,3 +1,42 @@
+bash
+
+
+git clone https://github.com/igetit41/astrophotography.git
+
+export workdir=~/astrophotography
+git -C $workdir restore .
+git -C $workdir fetch
+git -C $workdir merge
+
+
+Restart=on-failure
+
+hostname -I
+
+sudo touch /boot/firmware/ssh
+
+
+chmod +x ~/astrophotography/raspberrypi_startup.sh
+crontab -e @reboot ~/astrophotography/raspberrypi_startup.sh
+
+
+service astrophotography status
+
+
+storage.buckets.list
+storage.folders.create
+storage.objects.create
+
+curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz
+tar -xf google-cloud-cli-linux-x86_64.tar.gz
+./google-cloud-sdk/install.sh
+./google-cloud-sdk/bin/gcloud init
+source '/home/d3/google-cloud-sdk/path.bash.inc'
+source '/home/d3/google-cloud-sdk/completion.bash.inc'
+
+
+
+
 
 watch -n 1 systemctl status -n 30 astrophotography.service
 
@@ -73,44 +112,24 @@ Camera Controls
 
 
 
-
-
-
 sudo apt-get install fswebcam -y
 fswebcam -r 640x480 --jpeg 85 -D 1 web-cam-shot.jpg
 fswebcam -r 3264x2448 --jpeg 85 -D 1 web-cam-shot.jpg
 
-git clone https://github.com/igetit41/astrophotography.git
 
-export workdir=~/astrophotography
-git -C $workdir restore .
-git -C $workdir fetch
-git -C $workdir merge
+Alternate capture programs
+sudo apt-get install streamer
+streamer -o 0000.jpeg -s 300x200 -j 100 -t 2000 -r 1
 
-
-Restart=on-failure
-
-hostname -I
-
-sudo touch /boot/firmware/ssh
+fswebcam -r 640x480 --jpeg 85 -D 1 web-cam-shot.jpg
+fswebcam -r 3264x2448 --jpeg 85 -D 1 web-cam-shot.jpg
 
 
-chmod +x ~/astrophotography/raspberrypi_startup.sh
-crontab -e @reboot ~/astrophotography/raspberrypi_startup.sh
+Video
+sudo apt install ffmpeg
+ffmpeg -framerate 30 -pattern_type glob -i "folder-with-photos/*.JPG" -s:v 1440x1080 -c:v prores -profile:v 3 -pix_fmt yuv422p10 my-timelapse.mov
 
+ffmpeg -r 30 -i %04d.jpeg -s hd480 -vcodec libx264 -vpre hq time-lapse.mp4
 
-service astrophotography status
-
-
-storage.buckets.list
-storage.folders.create
-storage.objects.create
-
-curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz
-tar -xf google-cloud-cli-linux-x86_64.tar.gz
-./google-cloud-sdk/install.sh
-./google-cloud-sdk/bin/gcloud init
-source '/home/d3/google-cloud-sdk/path.bash.inc'
-source '/home/d3/google-cloud-sdk/completion.bash.inc'
 
 
