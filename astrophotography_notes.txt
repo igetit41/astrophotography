@@ -12,6 +12,7 @@ v4l2-ctl --list-ctrls
 
 watch -n 1 systemctl status -n 30 astrophotography.service
 
+sed -i 's/geteuid/getppid/' /usr/bin/vlc
 cvlc -f v4l2:///dev/video0
 
 defaults
