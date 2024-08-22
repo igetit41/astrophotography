@@ -5,9 +5,8 @@ fileformat=.png
 path_to_gcloud_auth=../gcloud_auth
 gsbucket=sandcastle-401716-photos
 
-#device_pad="'"
-#device_command="v4l2-ctl --list-devices | grep -i '${1}' -A 1 | grep -i '/dev/video'"
-#device_resultx=$(v4l2-ctl --list-devices | grep -i $1 -A 1 | grep -i '/dev/video')
+device="'${1}'"
+device_resultx=$(v4l2-ctl --list-devices | grep -i $device -A 1 | grep -i '/dev/video' | xargs)
 #resolution=$2
 
 #device_result=$(v4l2-ctl --list-devices | grep -i 'FIBONAX Nova800' -A 1 | grep -i '/dev/video' | xargs)
@@ -17,6 +16,8 @@ device_result=$(v4l2-ctl --list-devices | grep -i 'USB 2.0 Camera' -A 1 | grep -
 resolution=1920x1080
 
 auto_exposure_result=$(v4l2-ctl -d $device_result --set-ctrl auto_exposure=3)
+#set_controls_result=$(v4l2-ctl -d $device_result -c auto_exposure=1 -c exposure_time_absolute=5000 -c brightness=30 -c gain=50 -c contrast=32)
+
 #cvlc_result=$(nohup cvlc -f v4l2://$device_result &)
 
 foldername=$(date +"%Y-%m-%d-%H-%M-%S")
@@ -39,7 +40,7 @@ while true; do
 
     #eom_result=$(eom -f ./photos/$foldername/$stamp$fileformat &)
     
-    #echo "eom_result: $eom_result"
+    echo "device_resultx: $device_resultx"
 
     # Sleep
     sleep $pic_timer
