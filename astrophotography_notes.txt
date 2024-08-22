@@ -110,8 +110,8 @@ Camera Controls
 
 v4l2-ctl -d /dev/video0 -c auto_exposure=1
 v4l2-ctl -d /dev/video0 -c exposure_time_absolute=5000
-v4l2-ctl -d /dev/video0 -c brightness=50
-v4l2-ctl -d /dev/video0 -c gain=90
+v4l2-ctl -d /dev/video0 -c brightness=30
+v4l2-ctl -d /dev/video0 -c gain=50
 v4l2-ctl -d /dev/video0 -c contrast=32
 
 
