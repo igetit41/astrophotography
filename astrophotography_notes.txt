@@ -1,4 +1,8 @@
-sudo apt-get install fswebcam -y
+
+watch -n 1 systemctl status -n 30 astrophotography.service
+
+sed -i 's/geteuid/getppid/' /usr/bin/vlc
+cvlc -f v4l2:///dev/video0
 
 sudo apt install v4l-utils -y
 
@@ -7,13 +11,6 @@ v4l2-ctl -d 2 --list-formats --list-ctrls
 v4l2-ctl --list-ctrls-menus
 v4l2-ctl -c brightness=64
 v4l2-ctl -c contrast=65
-
-v4l2-ctl --list-ctrls
-
-watch -n 1 systemctl status -n 30 astrophotography.service
-
-sed -i 's/geteuid/getppid/' /usr/bin/vlc
-cvlc -f v4l2:///dev/video0
 
 defaults
 v4l2-ctl -c brightness=0
@@ -24,6 +21,9 @@ v4l2-ctl -c sharpness=2
 
 v4l2-ctl -c white_balance_automatic=1
 v4l2-ctl -c white_balance_temperature=4
+
+
+v4l2-ctl --list-ctrls
 
 User Controls
 
@@ -41,7 +41,7 @@ Camera Controls
                   auto_exposure 0x009a0901 (menu)   : min=0 max=3 default=0 value=0
          exposure_time_absolute 0x009a0902 (int)    : min=1 max=12287 step=1 default=78 value=5000 flags=inactive
 
-
+sudo apt-get install fswebcam -y
 fswebcam -r 640x480 --jpeg 85 -D 1 web-cam-shot.jpg
 fswebcam -r 3264x2448 --jpeg 85 -D 1 web-cam-shot.jpg
 
