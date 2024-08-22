@@ -16,6 +16,7 @@ gsbucket=sandcastle-401716-photos
 device_result=$(v4l2-ctl --list-devices | grep -i 'USB 2.0 Camera' -A 1 | grep -i '/dev/video' | xargs)
 resolution=1920x1080
 
+auto_exposure_result=$(v4l2-ctl -d $device_result --set-ctrl auto_exposure=3)
 #cvlc_result=$(nohup cvlc -f v4l2://$device_result &)
 
 foldername=$(date +"%Y-%m-%d-%H-%M-%S")
@@ -35,11 +36,10 @@ while true; do
 
     # Pass gcloud upload command to gcloud_auth.sh
     upload=$(/bin/bash $path_to_gcloud_auth/gcloud_auth.sh "$gcloud_upload")
+
+    #eom -f ./photos/$foldername/$stamp$fileformat
     
-    #echo "ARG1: $1"
-    #echo "device_command: $device_command"
-    #echo "device_resultx: $device_resultx"
-    #echo "cvlc_result: $cvlc_result"
+    #echo "auto_exposure_result: $auto_exposure_result"
 
     # Sleep
     sleep $pic_timer
