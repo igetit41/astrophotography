@@ -37,9 +37,9 @@ while true; do
     # Pass gcloud upload command to gcloud_auth.sh
     upload=$(/bin/bash $path_to_gcloud_auth/gcloud_auth.sh "$gcloud_upload")
 
-    nohup eom -f ./photos/$foldername/$stamp$fileformat &
+    eom_result=$(eom -f ./photos/$foldername/$stamp$fileformat &)
     
-    echo "auto_exposure_result: $auto_exposure_result"
+    echo "eom_result: $eom_result"
 
     # Sleep
     sleep $pic_timer
