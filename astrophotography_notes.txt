@@ -1,3 +1,6 @@
+windows
+https://github.com/jpalbert/webcam-settings-dialog-windows
+
 bash
 
 
