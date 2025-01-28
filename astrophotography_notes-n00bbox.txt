@@ -122,27 +122,9 @@ v4l2-ctl -d /dev/video0 -c auto_exposure=1 -c exposure_time_absolute=5000 -c bri
 
 v4l2-ctl -c auto_exposure=1
 v4l2-ctl -c exposure_time_absolute=5000
-v4l2-ctl -c gain=50
-v4l2-ctl -c brightness=32
-v4l2-ctl -c contrast=32
-
-                     brightness 0x00980900 (int)    : min=-64 max=64 step=1 default=0 value=0
-                       contrast 0x00980901 (int)    : min=0 max=64 step=1 default=32 value=40
-                     saturation 0x00980902 (int)    : min=0 max=128 step=1 default=64 value=80
-                            hue 0x00980903 (int)    : min=-40 max=40 step=1 default=0 value=0
-        white_balance_automatic 0x0098090c (bool)   : default=1 value=1
-                          gamma 0x00980910 (int)    : min=72 max=500 step=1 default=100 value=100
-                           gain 0x00980913 (int)    : min=0 max=100 step=1 default=0 value=20
-           power_line_frequency 0x00980918 (menu)   : min=0 max=2 default=1 value=1 (50 Hz)
-      white_balance_temperature 0x0098091a (int)    : min=2800 max=6500 step=1 default=4600 value=4600 flags=inactive  
-                      sharpness 0x0098091b (int)    : min=0 max=6 step=1 default=3 value=3
-         backlight_compensation 0x0098091c (int)    : min=0 max=2 step=1 default=1 value=1
-
-Camera Controls
-
-                  auto_exposure 0x009a0901 (menu)   : min=0 max=3 default=3 value=1 (Manual Mode)
-         exposure_time_absolute 0x009a0902 (int)    : min=1 max=5000 step=1 default=156 value=5000
-     exposure_dynamic_framerate 0x009a0903 (bool)   : default=0 value=0
+v4l2-ctl -c gain=100
+v4l2-ctl -c brightness=64
+v4l2-ctl -c contrast=64
 
 sudo apt-get install fswebcam -y
 fswebcam -r 640x480 --jpeg 85 -D 1 web-cam-shot.jpg
@@ -164,5 +146,4 @@ ffmpeg -framerate 30 -pattern_type glob -i "./*.png" -s:v 1920x1080 -c:v prores 
 ffmpeg -r 30 -i %04d.jpeg -s hd480 -vcodec libx264 -vpre hq time-lapse.mp4
 
 curl -m 840 -X POST https://us-west1-sandcastle-401716.cloudfunctions.net/timelapse_01 -H "Authorization: bearer $(gcloud auth print-identity-token)" -H "Content-Type: application/json" -d '{  "bucket_name": "sandcastle-401716-photos", "bucket_path": "2024-10-02-09-21-23", "starting_image": "", "image_count": "600" }'
-curl -m 840 -X POST https://us-west1-sandcastle-401716.cloudfunctions.net/timelapse_01 -H "Authorization: bearer $(gcloud auth print-identity-token)" -H "Content-Type: application/json" -d '{  "bucket_name": "sandcastle-401716-photos", "bucket_path": "2024-09-25-08-30-59", "starting_image": "2024-10-02-04-28-46.png", "image_count": 300 }'
 
