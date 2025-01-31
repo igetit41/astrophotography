@@ -163,6 +163,10 @@ ffmpeg -framerate 30 -pattern_type glob -i "./*.png" -s:v 1920x1080 -c:v prores 
 
 ffmpeg -r 30 -i %04d.jpeg -s hd480 -vcodec libx264 -vpre hq time-lapse.mp4
 
+
 curl -m 840 -X POST https://us-west1-sandcastle-401716.cloudfunctions.net/timelapse_01 -H "Authorization: bearer $(gcloud auth print-identity-token)" -H "Content-Type: application/json" -d '{  "bucket_name": "sandcastle-401716-photos", "bucket_path": "2024-10-02-09-21-23", "starting_image": "", "image_count": "600" }'
-curl -m 840 -X POST https://us-west1-sandcastle-401716.cloudfunctions.net/timelapse_01 -H "Authorization: bearer $(gcloud auth print-identity-token)" -H "Content-Type: application/json" -d '{  "bucket_name": "sandcastle-401716-photos", "bucket_path": "2024-09-25-08-30-59", "starting_image": "2024-10-02-04-28-46.png", "image_count": 300 }'
+
+
+
+curl -m 840 -X POST https://us-west1-sandcastle-401716.cloudfunctions.net/timelapse_01 -H "Authorization: bearer $(gcloud auth print-identity-token)" -H "Content-Type: application/json" -d '{  "bucket_name": "sandcastle-401716-photos", "bucket_path": "2025-01-27-17-51-42", "starting_image": "2025-01-27-17-51-42.png", "image_count": 600 }'
 

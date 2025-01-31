@@ -35,12 +35,6 @@ sudo chmod +x $objective_path/astrophotography/astrophotography.sh
 sudo chmod +x $objective_path/astrophotography/raspberrypi_startup.sh
 sudo chmod +x $objective_path/gcloud_auth/gcloud_auth.sh
 
-v4l2-ctl -c auto_exposure=1
-v4l2-ctl -c exposure_time_absolute=5000
-v4l2-ctl -c gain=100
-v4l2-ctl -c brightness=64
-v4l2-ctl -c contrast=64
-
 # Restart Server
 sudo systemctl enable astrophotography
 sudo systemctl restart astrophotography
