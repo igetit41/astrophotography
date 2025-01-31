@@ -32,7 +32,6 @@ fi
 
 # chmod all scripts
 sudo chmod +x $objective_path/astrophotography/astrophotography.sh
-sudo chmod +x $objective_path/astrophotography/raspberrypi_startup.sh
 sudo chmod +x $objective_path/gcloud_auth/gcloud_auth.sh
 
 # Restart Server
