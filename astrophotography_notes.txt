@@ -38,6 +38,8 @@ source '/home/d3/google-cloud-sdk/path.bash.inc'
 source '/home/d3/google-cloud-sdk/completion.bash.inc'
 
 
+crontab -e
+@reboot  /home/d3/raspberrypi_startup.sh
 
 
 

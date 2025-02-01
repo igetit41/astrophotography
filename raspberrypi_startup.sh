@@ -4,6 +4,12 @@
 #sudo apt-get install fswebcam -y
 #sudo apt install v4l-utils -y
 
+#Copy to /home/d3
+#sudo chmod +x /home/d3/raspberrypi_startup.sh
+#crontab -e
+#@reboot  /home/d3/raspberrypi_startup.sh
+
+
 objective_path=/home/d3
 
 wait_cycles=12
