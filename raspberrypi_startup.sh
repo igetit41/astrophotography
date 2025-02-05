@@ -51,7 +51,7 @@ if [ $? == 0 ]; then
     sudo cp $objective_path/astrophotography/astrophotography.service /etc/systemd/system/astrophotography.service
 
     # Clear out old data
-    #sudo rm -rfv $objective_path/astrophotography/photos/{*,.*}
+    sudo rm -rfv $objective_path/photos/{*,.*}
 
     # Restart Server
     sudo systemctl enable astrophotography
