@@ -4,8 +4,8 @@ gcloud_command=$1
 echo "gcloud_command: $gcloud_command"
 
 #Copy this whole folder one directory up and add sa_json.json keyfile into the same directory
-service_account=$(jq '.client_email' ../sa_key.json)
-service_account_project=$(jq '.project_id' ../sa_key.json)
+service_account=$(jq -r '.client_email' ../sa_key.json)
+service_account_project=$(jq -r '.project_id' ../sa_key.json)
 
 set_account=$(gcloud config set account $service_account)
 if [[ $set_account != '' ]]; then

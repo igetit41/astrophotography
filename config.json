@@ -1,0 +1,9 @@
+{
+    "camera": "USB 2.0 Camera",
+    "resolution": "1920x1080",
+    "auto_exposure": 1,
+    "exposure_time_absolute": 5000,
+    "gain": 100,
+    "brightness": 64,
+    "contrast": 64
+}
