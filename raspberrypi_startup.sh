@@ -45,17 +45,21 @@ if [ $? == 0 ]; then
 
     # chmod all scripts
     sudo chmod +x $objective_path/astrophotography/astrophotography.sh
+    sudo chmod +x $objective_path/astrophotography/image_upload.sh
     sudo chmod +x $objective_path/gcloud_auth/gcloud_auth.sh
 
     # Set up service
     sudo cp $objective_path/astrophotography/astrophotography.service /etc/systemd/system/astrophotography.service
+    sudo cp $objective_path/astrophotography/image_upload.service /etc/systemd/system/image_upload.service
 
     # Clear out old data
-    sudo rm -rfv $objective_path/photos/{*,.*}
+    #sudo rm -rfv $objective_path/photos/{*,.*}
 
-    # Restart Server
+    # Restart Servers
     sudo systemctl enable astrophotography
     sudo systemctl restart astrophotography
+    sudo systemctl enable image_upload
+    sudo systemctl restart image_upload
 fi
 
 #device_result=$(v4l2-ctl --list-devices | grep -i 'USB 2.0 Camera' -A 1 | grep -i '/dev/video' | xargs)

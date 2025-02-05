@@ -1,0 +1,10 @@
+[Unit]
+Description=image_upload
+
+[Service]
+User=root
+WorkingDirectory=/home/d3/astrophotography
+ExecStart=/home/d3/astrophotography/image_upload.sh
+
+[Install]
+WantedBy=multi-user.target
