@@ -53,7 +53,7 @@ while true; do
             done
             if [[ "$match_found" == "false" ]]; then
                 gcloud_command="gsutil cp $image_local $bucket_prefix$image_local_trunk"
-                echo "gcloud_upload: $gcloud_upload"
+                echo "gcloud_command: $gcloud_command"
                 upload=$(/bin/bash $working_dir/gcloud_auth/gcloud_auth.sh "$gcloud_command")
                 echo $upload
                 
