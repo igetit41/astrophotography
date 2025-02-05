@@ -5,7 +5,7 @@
 #device_result=$(v4l2-ctl --list-devices | grep -i 'USB 2.0 Camera' -A 1 | grep -i '/dev/video' | xargs)
 #resolution=1920x1080
 
-working_dir=${$(pwd)%/*}
+working_dir=/home/d3
 echo $working_dir
 
 #gsbucket=$(jq -r '.gsbucket' ./config.json)
