@@ -26,11 +26,11 @@ while true; do
         read -ra images_bucket_array <<< "$images_bucket"
 
         local_prefix="$working_dir/photos/"
-        local_prefix_length=${#str}
+        local_prefix_length=${#local_prefix}
         echo $local_prefix_length
 
         bucket_prefix="gs://$gsbucket/"
-        bucket_prefix_length=${#str}
+        bucket_prefix_length=${#bucket_prefix}
         echo $bucket_prefix_length
 
         for image_local in $images_local_array;
