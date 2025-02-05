@@ -5,7 +5,7 @@
 #device_result=$(v4l2-ctl --list-devices | grep -i 'USB 2.0 Camera' -A 1 | grep -i '/dev/video' | xargs)
 #resolution=1920x1080
 
-working_dir=$(pwd ../)
+working_dir=${$(pwd)%/*}
 gsbucket=$(jq -r '.gsbucket' ./config.json)
 pic_timer=$(jq -r '.pic_timer' ./config.json)
 
@@ -36,7 +36,7 @@ while true; do
             echo $image_local
             image_local_trunk="${image_local:$local_prefix_length}"
             echo $image_local_trunk
-            match_found=false
+            match_found="false"
 
             for image_bucket in $images_bucket_array;
             do
@@ -45,8 +45,8 @@ while true; do
                 echo $image_bucket_trunk
 
                 if [[$image_local_trunk = $image_bucket_trunk]]; then
-                    match_found=true
-                    break
+                    match_found="true"
+                    break;
                 fi
             done
             if [$match_found = "false"]; then
