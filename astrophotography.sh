@@ -9,7 +9,7 @@ working_dir=$(pwd ../)
 gsbucket=$(jq -r '.gsbucket' ./config.json)
 pic_timer=$(jq -r '.pic_timer' ./config.json)
 file_format=$(jq -r '.file_format' ./config.json)
-camera=$(jq -r '.camera' ./config.json)
+camera=$(jq '.camera' ./config.json)
 resolution=$(jq -r '.resolution' ./config.json)
 
 device_result=$(v4l2-ctl --list-devices | grep -i $camera -A 1 | grep -i '/dev/video' | xargs)
@@ -24,6 +24,8 @@ foldername=$(date +"%Y-%m-%d-%H-%M-%S")
 mkdir -p $working_dir/photos/$foldername
 
 while true; do
+    echo $working_dir
+
     # Timestamp
     stamp=$(date +"%Y-%m-%d-%H-%M-%S")
 
