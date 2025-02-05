@@ -26,6 +26,7 @@ while true; do
         IFS='\n'
         read -ra images_local_array <<< "$images_local"
         echo "images_local_array: $images_local_array"
+
         read -ra images_bucket_array <<< "$images_bucket"
         echo "images_bucket_array: $images_bucket_array"
 
@@ -37,14 +38,14 @@ while true; do
         bucket_prefix_length=${#bucket_prefix}
         echo "bucket_prefix_length: $bucket_prefix_length"
 
-        for image_local in $images_local_array;
+        for image_local in "${images_local_array[@]}";
         do
             echo "image_local: $image_local"
             image_local_trunk="${image_local:$local_prefix_length}"
             echo "image_local_trunk: $image_local_trunk"
             match_found="false"
 
-            for image_bucket in $images_bucket_array;
+            for image_bucket in "${images_bucket_array[@]}";
             do
                 echo "image_bucket: $image_bucket"
                 image_bucket_trunk="${image_bucket:$bucket_prefix_length}"
