@@ -44,12 +44,12 @@ while true; do
                 image_bucket_trunk="${image_bucket:$bucket_prefix_length}"
                 echo $image_bucket_trunk
 
-                if [[$image_local_trunk == $image_bucket_trunk]]; then
+                if [$image_local_trunk == $image_bucket_trunk]; then
                     match_found="true"
                     break;
                 fi
             done
-            if [[$match_found == "false"]]; then
+            if [$match_found == "false"]; then
                 gcloud_command="gsutil cp $image_local $bucket_prefix$image_local_trunk"
                 echo "gcloud_upload: $gcloud_upload"
                 upload=$(/bin/bash $working_dir/gcloud_auth/gcloud_auth.sh "$gcloud_command")
