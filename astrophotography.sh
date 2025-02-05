@@ -36,6 +36,8 @@ while true; do
     # Timestamp
     stamp=$(date +"%Y-%m-%d-%H-%M-%S")
 
+    echo $(pwd)
+
     # Take a pic
     fswebcam -d $device_result -r $resolution --png 9 --no-banner -D 10 --save ./photos/$foldername/$stamp$fileformat
 
@@ -49,7 +51,7 @@ while true; do
 
     #eom_result=$(eom -f ./photos/$foldername/$stamp$fileformat &)
     
-    echo "device_resultx: $device_resultx"
+    echo "device_result: $device_result"
 
     # Sleep
     sleep $pic_timer
