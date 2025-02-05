@@ -9,10 +9,10 @@ working_dir=$(pwd ../)
 gsbucket=$(jq -r '.gsbucket' ./config.json)
 pic_timer=$(jq -r '.pic_timer' ./config.json)
 file_format=$(jq -r '.file_format' ./config.json)
-camera=$(jq '.camera' ./config.json)
+camera=$(jq -r '.camera' ./config.json)
 resolution=$(jq -r '.resolution' ./config.json)
 
-device_result=$(v4l2-ctl --list-devices | grep -i $camera -A 1 | grep -i '/dev/video' | xargs)
+device_result=$(v4l2-ctl --list-devices | grep -i "$camera" -A 1 | grep -i '/dev/video' | xargs)
 
 v4l2-ctl -d /dev/video0 -c auto_exposure=$(jq -r '.auto_exposure' ./config.json)
 v4l2-ctl -d /dev/video0 -c exposure_time_absolute=$(jq -r '.exposure_time_absolute' ./config.json)
