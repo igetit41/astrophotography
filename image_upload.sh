@@ -42,11 +42,15 @@ while true; do
         for image_local in "${images_local_array[@]}";
         do
             echo "image_local: $image_local"
+            image_local_trunk="${image_local:$local_prefix_length}"
+            echo "image_local_trunk: $image_local_trunk"
         done
 
         for image_bucket in "${images_bucket_array[@]}";
         do
             echo "image_bucket: $image_bucket"
+            image_bucket_trunk="${image_bucket:$bucket_prefix_length}"
+            echo "image_bucket_trunk: $image_bucket_trunk"
         done
 
         #for image_local in "${images_local_array[@]}";
