@@ -1,7 +1,6 @@
 #!/bin/bash
 
 gcloud_command=$1
-echo "gcloud_command: $gcloud_command"
 
 #Copy this whole folder one directory up and add sa_json.json keyfile into the same directory
 service_account=$(jq -r '.client_email' ../sa_key.json)

@@ -58,7 +58,7 @@ while true; do
                     break;
                 fi
             done
-            
+
             if [[ "$match_found" == "false" ]]; then
                 gcloud_command="gsutil cp $image_local $bucket_prefix$image_local_trunk"
                 echo "gcloud_command: $gcloud_command"
@@ -68,6 +68,7 @@ while true; do
                 if [[ $upload =~ 'ERROR:' ]]; then
                     echo "ERROR: $upload"
                 else
+                    echo "delete image: $image_local"
                     rm $image_local
                 fi
             fi

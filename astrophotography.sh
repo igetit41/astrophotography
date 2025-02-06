@@ -17,35 +17,27 @@ resolution=$(jq -r '.resolution' ./config.json)
 device_result=$(v4l2-ctl --list-devices | grep -i "$camera" -A 1 | grep -i '/dev/video' | xargs)
 echo "device_result: $device_result"
 
-v4l2-ctl -d /dev/video0 -c auto_exposure=$(jq -r '.auto_exposure' ./config.json)
-v4l2-ctl -d /dev/video0 -c exposure_time_absolute=$(jq -r '.exposure_time_absolute' ./config.json)
-v4l2-ctl -d /dev/video0 -c gain=$(jq -r '.gain' ./config.json)
-v4l2-ctl -d /dev/video0 -c brightness=$(jq -r '.brightness' ./config.json)
-v4l2-ctl -d /dev/video0 -c contrast=$(jq -r '.contrast' ./config.json)
+if [[ "$device_result" != "" ]]; then
+    v4l2-ctl -d /dev/video0 -c auto_exposure=$(jq -r '.auto_exposure' ./config.json)
+    v4l2-ctl -d /dev/video0 -c exposure_time_absolute=$(jq -r '.exposure_time_absolute' ./config.json)
+    v4l2-ctl -d /dev/video0 -c gain=$(jq -r '.gain' ./config.json)
+    v4l2-ctl -d /dev/video0 -c brightness=$(jq -r '.brightness' ./config.json)
+    v4l2-ctl -d /dev/video0 -c contrast=$(jq -r '.contrast' ./config.json)
 
-foldername=$(date +"%Y-%m-%d-%H-%M-%S")
-mkdir -p $working_dir/photos/$foldername
+    foldername=$(date +"%Y-%m-%d-%H-%M-%S")
+    mkdir -p $working_dir/photos/$foldername
+fi
 
 while true; do
-    # Timestamp
-    stamp=$(date +"%Y-%m-%d-%H-%M-%S")
 
-    # Take a pic
-    fswebcam -d $device_result -r $resolution --png 9 --no-banner -D 10 --save $working_dir/photos/$foldername/$stamp$file_format
+    if [[ "$device_result" != "" ]]; then
+        # Timestamp
+        stamp=$(date +"%Y-%m-%d-%H-%M-%S")
 
-    ## Upload to Cloud Storage
-    #gcloud_upload="gsutil cp $working_dir/photos/$foldername/$stamp$file_format gs://$gsbucket/$foldername/$stamp$file_format"
-    #echo "gcloud_upload: $gcloud_upload"
-
-    ## Pass gcloud upload command to gcloud_auth.sh
-    #upload=$(/bin/bash $working_dir/gcloud_auth/gcloud_auth.sh "$gcloud_upload")
+        # Take a pic
+        fswebcam -d $device_result -r $resolution --png 9 --no-banner -D 10 --save $working_dir/photos/$foldername/$stamp$file_format
+    fi
     
     # Sleep
     sleep $pic_timer
-
-    #if [[ $upload =~ 'ERROR:' ]]; then
-    #    echo "ERROR: $upload"
-    #else
-    #    rm $working_dir/photos/$foldername/$stamp$file_format
-    #fi
 done
