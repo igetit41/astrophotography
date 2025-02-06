@@ -42,34 +42,44 @@ while true; do
         for image_local in "${images_local_array[@]}";
         do
             echo "image_local: $image_local"
-            image_local_trunk="${image_local:$local_prefix_length}"
-            echo "image_local_trunk: $image_local_trunk"
-            match_found="false"
-
-            for image_bucket in "${images_bucket_array[@]}";
-            do
-                echo "image_bucket: $image_bucket"
-                image_bucket_trunk="${image_bucket:$bucket_prefix_length}"
-                echo "image_bucket_trunk: $image_bucket_trunk"
-
-                if [[ "$image_local_trunk" == "$image_bucket_trunk" ]]; then
-                    match_found="true"
-                    break;
-                fi
-            done
-            if [[ "$match_found" == "false" ]]; then
-                gcloud_command="gsutil cp $image_local $bucket_prefix$image_local_trunk"
-                echo "gcloud_command: $gcloud_command"
-                upload=$(/bin/bash $working_dir/gcloud_auth/gcloud_auth.sh "$gcloud_command")
-                echo $upload
-                
-                if [[ $upload =~ 'ERROR:' ]]; then
-                    echo "ERROR: $upload"
-                else
-                    rm $image_local
-                fi
-            fi
         done
+
+        for image_bucket in "${images_bucket_array[@]}";
+        do
+            echo "image_bucket: $image_bucket"
+        done
+
+        #for image_local in "${images_local_array[@]}";
+        #do
+        #    echo "image_local: $image_local"
+        #    image_local_trunk="${image_local:$local_prefix_length}"
+        #    echo "image_local_trunk: $image_local_trunk"
+        #    match_found="false"
+#
+        #    for image_bucket in "${images_bucket_array[@]}";
+        #    do
+        #        echo "image_bucket: $image_bucket"
+        #        image_bucket_trunk="${image_bucket:$bucket_prefix_length}"
+        #        echo "image_bucket_trunk: $image_bucket_trunk"
+#
+        #        if [[ "$image_local_trunk" == "$image_bucket_trunk" ]]; then
+        #            match_found="true"
+        #            break;
+        #        fi
+        #    done
+        #    if [[ "$match_found" == "false" ]]; then
+        #        gcloud_command="gsutil cp $image_local $bucket_prefix$image_local_trunk"
+        #        echo "gcloud_command: $gcloud_command"
+        #        upload=$(/bin/bash $working_dir/gcloud_auth/gcloud_auth.sh "$gcloud_command")
+        #        echo $upload
+        #        
+        #        if [[ $upload =~ 'ERROR:' ]]; then
+        #            echo "ERROR: $upload"
+        #        else
+        #            rm $image_local
+        #        fi
+        #    fi
+        #done
     fi
 
     # Sleep
