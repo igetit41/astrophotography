@@ -37,6 +37,7 @@ while true; do
         echo "images_local_array: $images_local_array"
 
         read -rd '' -a images_bucket_array <<< "$images_bucket"
+        images_bucket_array=("${images_bucket_array[@]:1}")
         echo "images_bucket_array: $images_bucket_array"
 
         for image_local in "${images_local_array[@]}";
