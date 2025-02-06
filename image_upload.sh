@@ -32,11 +32,11 @@ while true; do
         images_bucket=$(echo "${images_bucket#*$bucket_prefix}")
         echo "images_bucket: $images_bucket"
 
-        IFS='\n'
-        read -ra images_local_array <<< "$images_local"
+        IFS=$'\n'
+        read -rd '' -a images_local_array <<< "$images_local"
         echo "images_local_array: $images_local_array"
 
-        read -ra images_bucket_array <<< "$images_bucket"
+        read -rd '' -a images_bucket_array <<< "$images_bucket"
         echo "images_bucket_array: $images_bucket_array"
 
         for image_local in "${images_local_array[@]}";
