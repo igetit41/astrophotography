@@ -21,6 +21,7 @@ while true; do
 
         gcloud_command="gcloud storage ls --recursive gs://$gsbucket/**"
         images_bucket=$(/bin/bash $working_dir/gcloud_auth/gcloud_auth.sh "$gcloud_command")
+        images_bucket=$(echo "$images_bucket" | cut -d'gs://' -f2-)
         echo "images_bucket: $images_bucket"
 
         IFS='\n'
