@@ -76,5 +76,6 @@ while true; do
     fi
 
     # Sleep
+    echo "sleeping for: $pic_timer"
     sleep $pic_timer
 done
