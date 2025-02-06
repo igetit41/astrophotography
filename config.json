@@ -9,5 +9,6 @@
     "delete": false,
     "file_format": ".png",
     "gsbucket": "sandcastle-401716-photos",
-    "pic_timer": 60
+    "pic_timer": 60,
+    "saturation": 128
 }

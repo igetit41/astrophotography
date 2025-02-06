@@ -23,6 +23,7 @@ if [[ "$device_result" != "" ]]; then
     v4l2-ctl -d /dev/video0 -c gain=$(jq -r '.gain' ./config.json)
     v4l2-ctl -d /dev/video0 -c brightness=$(jq -r '.brightness' ./config.json)
     v4l2-ctl -d /dev/video0 -c contrast=$(jq -r '.contrast' ./config.json)
+    v4l2-ctl -d /dev/video0 -c saturation=$(jq -r '.saturation' ./config.json)
 
     foldername=$(date +"%Y-%m-%d-%H-%M-%S")
     mkdir -p $working_dir/photos/$foldername
