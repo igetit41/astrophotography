@@ -16,7 +16,7 @@ while true; do
     echo "ping: $?"
     if [ $? == 0 ]; then
 
-        images_local=$(find $working_dir/photos -print)
+        images_local=$(find $working_dir/photos -name "*.png" -print)
         echo "images_local: $images_local"
 
         gcloud_command="gcloud storage ls --recursive gs://$gsbucket/**"
