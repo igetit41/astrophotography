@@ -9,6 +9,14 @@ working_dir=/home/d3
 gsbucket=$(jq -r '.gsbucket' ./config.json)
 pic_timer=$(jq -r '.pic_timer' ./config.json)
 
+local_prefix="$working_dir/photos/"
+local_prefix_length=${#local_prefix}
+echo "local_prefix_length: $local_prefix_length"
+
+bucket_prefix="gs://$gsbucket/"
+bucket_prefix_length=${#bucket_prefix}
+echo "bucket_prefix_length: $bucket_prefix_length"
+
 while true; do
     echo $working_dir
     ping -c 1 -q google.com >&/dev/null
@@ -21,7 +29,7 @@ while true; do
 
         gcloud_command="gcloud storage ls --recursive gs://$gsbucket/**"
         images_bucket=$(/bin/bash $working_dir/gcloud_auth/gcloud_auth.sh "$gcloud_command")
-        images_bucket=$(echo "$images_bucket" | cut -d'gs://' -f2-)
+        images_bucket=$(echo "${images_bucket#*$bucket_prefix}")
         echo "images_bucket: $images_bucket"
 
         IFS='\n'
@@ -30,14 +38,6 @@ while true; do
 
         read -ra images_bucket_array <<< "$images_bucket"
         echo "images_bucket_array: $images_bucket_array"
-
-        local_prefix="$working_dir/photos/"
-        local_prefix_length=${#local_prefix}
-        echo "local_prefix_length: $local_prefix_length"
-
-        bucket_prefix="gs://$gsbucket/"
-        bucket_prefix_length=${#bucket_prefix}
-        echo "bucket_prefix_length: $bucket_prefix_length"
 
         for image_local in "${images_local_array[@]}";
         do
