@@ -147,3 +147,4 @@ ffmpeg -r 30 -i %04d.jpeg -s hd480 -vcodec libx264 -vpre hq time-lapse.mp4
 
 curl -m 840 -X POST https://us-west1-sandcastle-401716.cloudfunctions.net/timelapse_01 -H "Authorization: bearer $(gcloud auth print-identity-token)" -H "Content-Type: application/json" -d '{  "bucket_name": "sandcastle-401716-photos", "bucket_path": "2024-10-02-09-21-23", "starting_image": "", "image_count": "600" }'
 
+

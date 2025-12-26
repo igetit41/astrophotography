@@ -20,3 +20,4 @@ gcloud_command_result=$($gcloud_command)
 if [[ $gcloud_command_result != '' ]]; then
     echo "$gcloud_command_result"
 fi
+
