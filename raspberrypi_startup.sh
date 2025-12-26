@@ -1,5 +1,7 @@
 #!/bin/bash
-# Setup
+# Raspberry Pi startup script - updates code and restarts services
+
+# Initial system setup commands (commented out - run once manually)
 #sudo apt update -y
 #sudo apt-get update -y
 #sudo apt-get install fswebcam -y
@@ -22,12 +24,15 @@
 #crontab -e
 #@reboot  /home/d3/raspberrypi_startup.sh
 
+# Set base directory
 objective_path=/home/d3
 
+# Wait for internet connection with timeout
 wait_cycles=12
 cycle=1
 ping -c 1 -q google.com >&/dev/null
 
+# Retry internet connection up to 12 times (1 minute)
 while [[ $? != 0 && $cycle < $wait_cycles ]]; do
     sleep 5
     cycle+=1
@@ -36,32 +41,34 @@ done
 
 echo "ping: $?"
 if [ $? == 0 ]; then
-    # Merge changes
+    # Update code from git repository
     git -C $objective_path/astrophotography restore .
     git -C $objective_path/astrophotography fetch
     git -C $objective_path/astrophotography merge
 
+    # Copy authentication files
     cp -R $objective_path/astrophotography/gcloud_auth $objective_path/
 
-    # chmod all scripts
+    # Make scripts executable
     sudo chmod +x $objective_path/astrophotography/astrophotography.sh
     sudo chmod +x $objective_path/astrophotography/image_upload.sh
     sudo chmod +x $objective_path/gcloud_auth/gcloud_auth.sh
 
-    # Set up service
+    # Install systemd service files
     sudo cp $objective_path/astrophotography/astrophotography.service /etc/systemd/system/astrophotography.service
     sudo cp $objective_path/astrophotography/image_upload.service /etc/systemd/system/image_upload.service
 
-    # Clear out old data
+    # Optional: Clear out old photos (commented out for safety)
     #sudo rm -rfv $objective_path/photos/{*,.*}
 
-    # Restart Servers
+    # Enable and restart photography services
     sudo systemctl enable astrophotography
     sudo systemctl restart astrophotography
     sudo systemctl enable image_upload
     sudo systemctl restart image_upload
 fi
 
+# Optional: Start VLC camera preview (commented out)
 #device_result=$(v4l2-ctl --list-devices | grep -i 'USB 2.0 Camera' -A 1 | grep -i '/dev/video' | xargs)
 #nohup cvlc -f v4l2://$device_result &
 

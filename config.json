@@ -1,14 +1,50 @@
 {
-    "camera": "USB 2.0 Camera",
-    "resolution": "1920x1080",
-    "auto_exposure": 1,
-    "exposure_time_absolute": 5000,
-    "gain": 100,
-    "brightness": 64,
-    "contrast": 64,
-    "delete": false,
-    "file_format": ".png",
-    "gsbucket": "sandcastle-401716-photos",
-    "pic_timer": 60,
-    "saturation": 128
+    "active_profile": "astrophotography",
+    "profiles": {
+        "astrophotography": {
+            "camera": "USB 2.0 Camera",
+            "resolution": "1920x1080",
+            "auto_exposure": 1,
+            "exposure_time_absolute": 5000,
+            "gain": 100,
+            "brightness": 64,
+            "contrast": 64,
+            "delete": false,
+            "file_format": ".png",
+            "gsbucket": "sandcastle-401716-photos",
+            "pic_timer": 60,
+            "saturation": 128,
+            "folder_prefix": "astro"
+        },
+        "aquarium": {
+            "camera": "USB 2.0 Camera",
+            "resolution": "1920x1080",
+            "auto_exposure": 3,
+            "exposure_time_absolute": 1000,
+            "gain": 50,
+            "brightness": 128,
+            "contrast": 128,
+            "delete": false,
+            "file_format": ".png",
+            "gsbucket": "sandcastle-401716-photos",
+            "pic_timer": 30,
+            "saturation": 150,
+            "folder_prefix": "aquarium"
+        },
+        "daylight": {
+            "camera": "USB 2.0 Camera",
+            "resolution": "1920x1080",
+            "auto_exposure": 3,
+            "exposure_time_absolute": 500,
+            "gain": 25,
+            "brightness": 100,
+            "contrast": 100,
+            "delete": false,
+            "file_format": ".png",
+            "gsbucket": "sandcastle-401716-photos",
+            "pic_timer": 15,
+            "saturation": 128,
+            "folder_prefix": "daylight"
+        }
+    }
 }
