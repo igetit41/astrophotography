@@ -41,6 +41,37 @@ done
 
 echo "ping: $?"
 if [ $? == 0 ]; then
+    # Configure static IP and enable SSH if on home network
+    current_ssid=$(iwgetid -r 2>/dev/null || echo "")
+    if [[ "$current_ssid" == "hillvalley" ]]; then
+        echo "On home network, configuring static IP..."
+        
+        # Enable SSH service
+        sudo systemctl enable ssh
+        sudo systemctl start ssh
+        
+        # Set static IP configuration (modify these values for your network)
+        sudo tee /etc/dhcpcd.conf.backup > /dev/null << 'EOF'
+# Static IP configuration for home network
+interface wlan0
+static ip_address=192.168.68.100/26
+static routers=192.168.68.1
+static domain_name_servers=192.168.68.1 8.8.8.8
+EOF
+        
+        # Apply network configuration if not already set
+        if ! grep -q "static ip_address=192.168.68.100" /etc/dhcpcd.conf; then
+            sudo cp /etc/dhcpcd.conf /etc/dhcpcd.conf.original
+            sudo cat /etc/dhcpcd.conf.backup >> /etc/dhcpcd.conf
+            echo "Static IP configured - will take effect on next reboot"
+        fi
+        
+        # Display current IP for immediate access
+        current_ip=$(hostname -I | awk '{print $1}')
+        echo "Current IP: $current_ip"
+        echo "SSH access: ssh d3@$current_ip"
+    fi
+    
     # Install missing dependencies if not already present
     if ! command -v convert &> /dev/null; then
         echo "Installing imagemagick for light detection..."
