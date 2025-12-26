@@ -14,7 +14,14 @@
             "gsbucket": "sandcastle-401716-photos",
             "pic_timer": 60,
             "saturation": 128,
-            "folder_prefix": "astro"
+            "folder_prefix": "astro",
+            "light_trigger_enabled": true,
+            "light_threshold": 15,
+            "light_trigger_mode": "dark",
+            "time_trigger_enabled": false,
+            "start_time": "20:00",
+            "stop_time": "06:00",
+            "check_interval": 300
         },
         "aquarium": {
             "camera": "USB 2.0 Camera",
@@ -29,7 +36,14 @@
             "gsbucket": "sandcastle-401716-photos",
             "pic_timer": 30,
             "saturation": 150,
-            "folder_prefix": "aquarium"
+            "folder_prefix": "aquarium",
+            "light_trigger_enabled": true,
+            "light_threshold": 40,
+            "light_trigger_mode": "bright",
+            "time_trigger_enabled": true,
+            "start_time": "08:00",
+            "stop_time": "22:00",
+            "check_interval": 60
         },
         "daylight": {
             "camera": "USB 2.0 Camera",
@@ -44,7 +58,14 @@
             "gsbucket": "sandcastle-401716-photos",
             "pic_timer": 15,
             "saturation": 128,
-            "folder_prefix": "daylight"
+            "folder_prefix": "daylight",
+            "light_trigger_enabled": false,
+            "light_threshold": 30,
+            "light_trigger_mode": "bright",
+            "time_trigger_enabled": true,
+            "start_time": "07:00",
+            "stop_time": "19:00",
+            "check_interval": 120
         }
     }
 }

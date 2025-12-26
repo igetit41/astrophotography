@@ -211,3 +211,6 @@ curl -m 840 -X POST https://us-west1-sandcastle-401716.cloudfunctions.net/timela
 curl -m 840 -X POST https://us-west1-sandcastle-401716.cloudfunctions.net/timelapse_01 -H "Authorization: bearer $(gcloud auth print-identity-token)" -H "Content-Type: application/json" -d '{  "bucket_name": "sandcastle-401716-photos", "bucket_path": "2025-01-27-17-51-42", "starting_image": "2025-01-27-17-51-42.png", "image_count": 600 }'
 
 
+192.168.68.1 192.168.68.55 192.168.68.56 192.168.68.52 192.168.68.50 192.168.68.66 192.168.68.53 192.168.68.62 192.168.68.79 192.168.68.67 192.168.68.76 192.168.68.70 192.168.68.51 192.168.68.57
+
+

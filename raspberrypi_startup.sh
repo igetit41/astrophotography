@@ -41,6 +41,18 @@ done
 
 echo "ping: $?"
 if [ $? == 0 ]; then
+    # Install missing dependencies if not already present
+    if ! command -v convert &> /dev/null; then
+        echo "Installing imagemagick for light detection..."
+        sudo apt-get update -y
+        sudo apt-get install imagemagick -y
+    fi
+    
+    if ! command -v bc &> /dev/null; then
+        echo "Installing bc for floating point math..."
+        sudo apt-get install bc -y
+    fi
+    
     # Update code from git repository
     git -C $objective_path/astrophotography restore .
     git -C $objective_path/astrophotography fetch
