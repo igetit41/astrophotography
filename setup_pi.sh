@@ -80,19 +80,60 @@ check_status "SSH configuration"
 
 echo ""
 echo "Step 7: Network configuration..."
-read -p "Enter your WiFi network name (SSID) for static IP setup: " WIFI_SSID
-read -p "Enter desired static IP (e.g., 192.168.1.100): " STATIC_IP
-read -p "Enter your router IP (e.g., 192.168.1.1): " ROUTER_IP
 
-# Extract network prefix from static IP (e.g., 192.168.1.100 -> 192.168.1)
-NETWORK_PREFIX=$(echo $STATIC_IP | cut -d'.' -f1-3)
+# Check if already connected to WiFi
+current_ssid=$(iwgetid -r 2>/dev/null || echo "")
+current_ip=$(hostname -I | awk '{print $1}' 2>/dev/null || echo "")
 
-# Update the startup script with actual network values
-sed -i "s/YOUR_WIFI_NAME/$WIFI_SSID/g" $USER_HOME/raspberrypi_startup.sh
-sed -i "s/192.168.1.100/$STATIC_IP/g" $USER_HOME/raspberrypi_startup.sh
-sed -i "s/192.168.1.1/$ROUTER_IP/g" $USER_HOME/raspberrypi_startup.sh
+if [[ -n "$current_ssid" ]]; then
+    echo "Already connected to WiFi network: $current_ssid"
+    if [[ -n "$current_ip" ]]; then
+        echo "Current IP address: $current_ip"
+    fi
+    echo ""
+    read -p "Do you want to configure static IP for automatic setup? (y/n): " configure_network
+else
+    echo "No WiFi connection detected."
+    configure_network="y"
+fi
 
-check_status "Network configuration"
+if [[ "$configure_network" == "y" || "$configure_network" == "Y" ]]; then
+    if [[ -n "$current_ssid" ]]; then
+        read -p "Enter WiFi network name (current: $current_ssid) [press Enter to use current]: " WIFI_SSID
+        WIFI_SSID=${WIFI_SSID:-$current_ssid}
+    else
+        read -p "Enter your WiFi network name (SSID): " WIFI_SSID
+    fi
+    
+    if [[ -n "$current_ip" ]]; then
+        read -p "Enter desired static IP (current: $current_ip) [press Enter to use current]: " STATIC_IP
+        STATIC_IP=${STATIC_IP:-$current_ip}
+    else
+        read -p "Enter desired static IP (e.g., 192.168.1.100): " STATIC_IP
+    fi
+    
+    # Try to detect router IP from current route
+    current_gateway=$(ip route | grep default | awk '{print $3}' 2>/dev/null || echo "")
+    if [[ -n "$current_gateway" ]]; then
+        read -p "Enter your router IP (current: $current_gateway) [press Enter to use current]: " ROUTER_IP
+        ROUTER_IP=${ROUTER_IP:-$current_gateway}
+    else
+        read -p "Enter your router IP (e.g., 192.168.1.1): " ROUTER_IP
+    fi
+
+    # Update the startup script with network values
+    sed -i "s/YOUR_WIFI_NAME/$WIFI_SSID/g" $USER_HOME/raspberrypi_startup.sh
+    sed -i "s/192.168.1.100/$STATIC_IP/g" $USER_HOME/raspberrypi_startup.sh
+    sed -i "s/192.168.1.1/$ROUTER_IP/g" $USER_HOME/raspberrypi_startup.sh
+    
+    echo "Network configuration updated for: $WIFI_SSID -> $STATIC_IP"
+    check_status "Network configuration"
+else
+    echo "Skipping network configuration - using current settings"
+    # Set placeholder values to prevent startup script errors
+    sed -i "s/YOUR_WIFI_NAME/SKIP_NETWORK_CONFIG/g" $USER_HOME/raspberrypi_startup.sh
+    echo "SUCCESS: Network configuration skipped"
+fi
 
 echo ""
 echo "Step 8: Setting up Google Cloud service account..."

@@ -7,9 +7,11 @@
 #device_result=$(v4l2-ctl --list-devices | grep -i 'USB 2.0 Camera' -A 1 | grep -i '/dev/video' | xargs)
 #resolution=1920x1080
 
-# Set working directory
-working_dir=/home/d3
-echo $working_dir
+# Set working directory to script location
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+working_dir="$(dirname "$script_dir")"
+echo "Script directory: $script_dir"
+echo "Working directory: $working_dir"
 
 # Get active profile
 active_profile=$(jq -r '.active_profile' ./config.json)
