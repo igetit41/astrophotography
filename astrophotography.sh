@@ -22,6 +22,7 @@ resolution=$(jq -r ".profiles.$active_profile.resolution" ./config.json)
 folder_prefix=$(jq -r ".profiles.$active_profile.folder_prefix" ./config.json)
 
 # Load trigger settings once at startup
+camera_device=$(jq -r ".profiles.$active_profile.camera_device" ./config.json)
 light_trigger_enabled=$(jq -r ".profiles.$active_profile.light_trigger_enabled" ./config.json)
 light_threshold=$(jq -r ".profiles.$active_profile.light_threshold" ./config.json)
 light_trigger_mode=$(jq -r ".profiles.$active_profile.light_trigger_mode" ./config.json)
@@ -36,13 +37,13 @@ echo "device_result: $device_result"
 
 # Configure camera if device found
 if [[ "$device_result" != "" ]]; then
-    # Apply profile-specific camera settings
-    v4l2-ctl -d /dev/video0 -c auto_exposure=$(jq -r ".profiles.$active_profile.auto_exposure" ./config.json)
-    v4l2-ctl -d /dev/video0 -c exposure_time_absolute=$(jq -r ".profiles.$active_profile.exposure_time_absolute" ./config.json)
-    v4l2-ctl -d /dev/video0 -c gain=$(jq -r ".profiles.$active_profile.gain" ./config.json)
-    v4l2-ctl -d /dev/video0 -c brightness=$(jq -r ".profiles.$active_profile.brightness" ./config.json)
-    v4l2-ctl -d /dev/video0 -c contrast=$(jq -r ".profiles.$active_profile.contrast" ./config.json)
-    v4l2-ctl -d /dev/video0 -c saturation=$(jq -r ".profiles.$active_profile.saturation" ./config.json)
+    # Apply profile-specific camera settings using configured device
+    v4l2-ctl -d $camera_device -c auto_exposure=$(jq -r ".profiles.$active_profile.auto_exposure" ./config.json)
+    v4l2-ctl -d $camera_device -c exposure_time_absolute=$(jq -r ".profiles.$active_profile.exposure_time_absolute" ./config.json)
+    v4l2-ctl -d $camera_device -c gain=$(jq -r ".profiles.$active_profile.gain" ./config.json)
+    v4l2-ctl -d $camera_device -c brightness=$(jq -r ".profiles.$active_profile.brightness" ./config.json)
+    v4l2-ctl -d $camera_device -c contrast=$(jq -r ".profiles.$active_profile.contrast" ./config.json)
+    v4l2-ctl -d $camera_device -c saturation=$(jq -r ".profiles.$active_profile.saturation" ./config.json)
 
     # Create timestamped folder with profile prefix
     foldername="${folder_prefix}-$(date +"%Y-%m-%d-%H-%M-%S")"
@@ -82,23 +83,21 @@ while true; do
         # Check time trigger if enabled
         if [[ "$time_trigger_enabled" == "true" ]]; then
             current_time=$(date +"%H:%M")
-            
-            if [[ "$start_time" > "$stop_time" ]]; then
-                # Overnight schedule
-                if [[ "$current_time" >= "$start_time" || "$current_time" <= "$stop_time" ]]; then
-                    time_ok="true"
-                else
-                    time_ok="false"
-                fi
-            else
-                # Same day schedule
+            if [[ "$start_time" < "$stop_time" ]]; then
+                # Same day: 08:00 to 22:00
                 if [[ "$current_time" >= "$start_time" && "$current_time" <= "$stop_time" ]]; then
                     time_ok="true"
                 else
                     time_ok="false"
                 fi
+            else
+                # Overnight: 20:00 to 06:00
+                if [[ "$current_time" >= "$start_time" || "$current_time" <= "$stop_time" ]]; then
+                    time_ok="true"
+                else
+                    time_ok="false"
+                fi
             fi
-            echo "Time trigger: $time_ok (current: $current_time, window: $start_time-$stop_time)"
         fi
         
         # Check light trigger if enabled

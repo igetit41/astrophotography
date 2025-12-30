@@ -3,6 +3,7 @@
     "profiles": {
         "astrophotography": {
             "camera": "USB 2.0 Camera",
+            "camera_device": "/dev/video0",
             "resolution": "1920x1080",
             "auto_exposure": 1,
             "exposure_time_absolute": 5000,
@@ -25,6 +26,7 @@
         },
         "aquarium": {
             "camera": "USB 2.0 Camera",
+            "camera_device": "/dev/video0",
             "resolution": "1920x1080",
             "auto_exposure": 3,
             "exposure_time_absolute": 1000,
@@ -47,6 +49,7 @@
         },
         "daylight": {
             "camera": "USB 2.0 Camera",
+            "camera_device": "/dev/video0",
             "resolution": "1920x1080",
             "auto_exposure": 3,
             "exposure_time_absolute": 500,
