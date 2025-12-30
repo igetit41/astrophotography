@@ -86,23 +86,29 @@ while true; do
         if [[ "$time_trigger_enabled" == "true" ]]; then
             current_time=$(date +"%H:%M")
             
-            # Handle overnight periods (e.g., 20:00 to 06:00)
-            if [[ "$start_time" > "$stop_time" ]]; then
-                # Overnight schedule
-                if [[ "$current_time" >= "$start_time" || "$current_time" <= "$stop_time" ]]; then
-                    time_ok="true"
+            # Validate time values are not empty
+            if [[ -n "$start_time" && -n "$stop_time" && -n "$current_time" ]]; then
+                # Handle overnight periods (e.g., 20:00 to 06:00)
+                if [[ "$start_time" > "$stop_time" ]]; then
+                    # Overnight schedule
+                    if [[ "$current_time" >= "$start_time" || "$current_time" <= "$stop_time" ]]; then
+                        time_ok="true"
+                    else
+                        time_ok="false"
+                    fi
                 else
-                    time_ok="false"
+                    # Same day schedule
+                    if [[ "$current_time" >= "$start_time" && "$current_time" <= "$stop_time" ]]; then
+                        time_ok="true"
+                    else
+                        time_ok="false"
+                    fi
                 fi
+                echo "Time trigger: $time_ok (current: $current_time, window: $start_time-$stop_time)"
             else
-                # Same day schedule
-                if [[ "$current_time" >= "$start_time" && "$current_time" <= "$stop_time" ]]; then
-                    time_ok="true"
-                else
-                    time_ok="false"
-                fi
+                echo "WARNING: Invalid time values - start: '$start_time', stop: '$stop_time', current: '$current_time'"
+                time_ok="false"
             fi
-            echo "Time trigger: $time_ok (current: $current_time, window: $start_time-$stop_time)"
         fi
         
         # Check light trigger if enabled
