@@ -19,7 +19,6 @@ pic_timer=$(jq -r ".profiles.$active_profile.pic_timer" ./config.json)
 file_format=$(jq -r ".profiles.$active_profile.file_format" ./config.json)
 camera=$(jq -r ".profiles.$active_profile.camera" ./config.json)
 resolution=$(jq -r ".profiles.$active_profile.resolution" ./config.json)
-folder_prefix=$(jq -r ".profiles.$active_profile.folder_prefix" ./config.json)
 
 # Load trigger settings once at startup
 camera_device=$(jq -r ".profiles.$active_profile.camera_device" ./config.json)
@@ -45,8 +44,8 @@ if [[ "$device_result" != "" ]]; then
     v4l2-ctl -d $camera_device -c contrast=$(jq -r ".profiles.$active_profile.contrast" ./config.json)
     v4l2-ctl -d $camera_device -c saturation=$(jq -r ".profiles.$active_profile.saturation" ./config.json)
 
-    # Create timestamped folder with profile prefix
-    foldername="${folder_prefix}-$(date +"%Y-%m-%d-%H-%M-%S")"
+    # Create timestamped folder with profile name
+    foldername="${active_profile}-$(date +"%Y-%m-%d-%H-%M-%S")"
     mkdir -p $working_dir/photos/$foldername
     echo "Created folder: $working_dir/photos/$foldername"
 fi

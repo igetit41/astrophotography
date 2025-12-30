@@ -1,7 +1,7 @@
 {
-    "active_profile": "astrophotography_2",
+    "active_profile": "astro_2",
     "profiles": {
-        "astrophotography_1": {
+        "astro_1": {
             "camera": "USB 2.0 Camera",
             "camera_device": "/dev/video0",
             "resolution": "1920x1080",
@@ -15,7 +15,6 @@
             "file_format": ".png",
             "gsbucket": "sandcastle-401716-photos",
             "pic_timer": 60,
-            "folder_prefix": "astro",
             "light_trigger_enabled": true,
             "light_threshold": 15,
             "light_trigger_mode": "dark",
@@ -24,7 +23,7 @@
             "stop_time": "06:00",
             "check_interval": 300
         },
-        "astrophotography_2": {
+        "astro_2": {
             "camera": "FIBONAX Nova80",
             "camera_device": "/dev/video0",
             "resolution": "1920x1080",
@@ -38,7 +37,6 @@
             "file_format": ".png",
             "gsbucket": "sandcastle-401716-photos",
             "pic_timer": 60,
-            "folder_prefix": "astro",
             "light_trigger_enabled": false,
             "light_threshold": 15,
             "light_trigger_mode": "dark",
@@ -61,7 +59,6 @@
             "file_format": ".png",
             "gsbucket": "sandcastle-401716-photos",
             "pic_timer": 5,
-            "folder_prefix": "aquarium",
             "light_trigger_enabled": true,
             "light_threshold": 40,
             "light_trigger_mode": "bright",
@@ -84,7 +81,6 @@
             "file_format": ".png",
             "gsbucket": "sandcastle-401716-photos",
             "pic_timer": 15,
-            "folder_prefix": "daylight",
             "light_trigger_enabled": false,
             "light_threshold": 30,
             "light_trigger_mode": "bright",

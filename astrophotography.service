@@ -2,7 +2,7 @@
 Description=astrophotography
 
 [Service]
-User=d3
+User=root
 WorkingDirectory=/home/d3/astrophotography
 EnvironmentFile=/home/d3/astrophotography/serviceConf.txt
 ExecStart=/home/d3/astrophotography/astrophotography.sh ${ARG1} ${ARG2}
