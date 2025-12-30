@@ -82,9 +82,9 @@ while true; do
         
         # Check time trigger if enabled
         if [[ "$time_trigger_enabled" == "true" ]]; then
-            current_hour=$(date +"%H")
-            start_hour=$(echo $start_time | cut -d: -f1)
-            stop_hour=$(echo $stop_time | cut -d: -f1)
+            current_hour=$((10#$(date +"%H")))
+            start_hour=$((10#$(echo $start_time | cut -d: -f1)))
+            stop_hour=$((10#$(echo $stop_time | cut -d: -f1)))
             
             if [[ $start_hour -lt $stop_hour ]]; then
                 # Same day
