@@ -1,7 +1,30 @@
 {
-    "active_profile": "aquarium",
+    "active_profile": "astrophotography_1",
     "profiles": {
-        "astrophotography": {
+        "astrophotography_1": {
+            "camera": "USB 2.0 Camera",
+            "camera_device": "/dev/video0",
+            "resolution": "1920x1080",
+            "auto_exposure": 1,
+            "exposure_time_absolute": 5000,
+            "gain": 100,
+            "brightness": 32,
+            "contrast": 32,
+            "delete": false,
+            "file_format": ".png",
+            "gsbucket": "sandcastle-401716-photos",
+            "pic_timer": 60,
+            "saturation": 64,
+            "folder_prefix": "astro",
+            "light_trigger_enabled": true,
+            "light_threshold": 15,
+            "light_trigger_mode": "dark",
+            "time_trigger_enabled": false,
+            "start_time": "20:00",
+            "stop_time": "06:00",
+            "check_interval": 300
+        },
+        "astrophotography_2": {
             "camera": "USB 2.0 Camera",
             "camera_device": "/dev/video0",
             "resolution": "1920x1080",
