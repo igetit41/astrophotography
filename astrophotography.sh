@@ -82,17 +82,20 @@ while true; do
         
         # Check time trigger if enabled
         if [[ "$time_trigger_enabled" == "true" ]]; then
-            current_time=$(date +"%H:%M")
-            if [[ "$start_time" < "$stop_time" ]]; then
-                # Same day: 08:00 to 22:00
-                if [[ "$current_time" >= "$start_time" && "$current_time" <= "$stop_time" ]]; then
+            current_hour=$(date +"%H")
+            start_hour=$(echo $start_time | cut -d: -f1)
+            stop_hour=$(echo $stop_time | cut -d: -f1)
+            
+            if [[ $start_hour -lt $stop_hour ]]; then
+                # Same day
+                if [[ $current_hour -ge $start_hour && $current_hour -lt $stop_hour ]]; then
                     time_ok="true"
                 else
                     time_ok="false"
                 fi
             else
-                # Overnight: 20:00 to 06:00
-                if [[ "$current_time" >= "$start_time" || "$current_time" <= "$stop_time" ]]; then
+                # Overnight
+                if [[ $current_hour -ge $start_hour || $current_hour -lt $stop_hour ]]; then
                     time_ok="true"
                 else
                     time_ok="false"
