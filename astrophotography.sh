@@ -110,20 +110,26 @@ while true; do
             light_level=$(get_light_level)
             echo "Current light level: $light_level%, threshold: $light_threshold%, mode: $light_trigger_mode"
             
-            if [[ "$light_trigger_mode" == "dark" ]]; then
-                # Trigger when dark (light level below threshold)
-                if (( $(echo "$light_level < $light_threshold" | bc -l) )); then
-                    light_ok="true"
+            # Validate light_level is numeric
+            if [[ "$light_level" =~ ^[0-9]+\.?[0-9]*$ ]]; then
+                if [[ "$light_trigger_mode" == "dark" ]]; then
+                    # Trigger when dark (light level below threshold)
+                    if (( $(echo "$light_level < $light_threshold" | bc -l) )); then
+                        light_ok="true"
+                    else
+                        light_ok="false"
+                    fi
                 else
-                    light_ok="false"
+                    # Trigger when bright (light level above threshold)
+                    if (( $(echo "$light_level > $light_threshold" | bc -l) )); then
+                        light_ok="true"
+                    else
+                        light_ok="false"
+                    fi
                 fi
             else
-                # Trigger when bright (light level above threshold)
-                if (( $(echo "$light_level > $light_threshold" | bc -l) )); then
-                    light_ok="true"
-                else
-                    light_ok="false"
-                fi
+                echo "WARNING: Invalid light level '$light_level', assuming conditions not met"
+                light_ok="false"
             fi
             echo "Light trigger: $light_ok"
         fi
