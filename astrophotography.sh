@@ -7,11 +7,8 @@
 #device_result=$(v4l2-ctl --list-devices | grep -i 'USB 2.0 Camera' -A 1 | grep -i '/dev/video' | xargs)
 #resolution=1920x1080
 
-# Set working directory to script location
-script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-working_dir="$(dirname "$script_dir")"
-echo "Script directory: $script_dir"
-echo "Working directory: $working_dir"
+# Set working directory
+working_dir=/home/d3
 
 # Get active profile
 active_profile=$(jq -r '.active_profile' ./config.json)
@@ -86,63 +83,40 @@ while true; do
         if [[ "$time_trigger_enabled" == "true" ]]; then
             current_time=$(date +"%H:%M")
             
-            # Validate time values are not empty
-            if [[ -n "$start_time" && -n "$stop_time" && -n "$current_time" ]]; then
-                # Convert times to minutes for proper comparison
-                current_min=$(( $(echo $current_time | cut -d: -f1) * 60 + $(echo $current_time | cut -d: -f2) ))
-                start_min=$(( $(echo $start_time | cut -d: -f1) * 60 + $(echo $start_time | cut -d: -f2) ))
-                stop_min=$(( $(echo $stop_time | cut -d: -f1) * 60 + $(echo $stop_time | cut -d: -f2) ))
-                
-                # Handle overnight periods (e.g., 20:00 to 06:00)
-                if [[ $start_min -gt $stop_min ]]; then
-                    # Overnight schedule
-                    if [[ $current_min -ge $start_min || $current_min -le $stop_min ]]; then
-                        time_ok="true"
-                    else
-                        time_ok="false"
-                    fi
+            if [[ "$start_time" > "$stop_time" ]]; then
+                # Overnight schedule
+                if [[ "$current_time" >= "$start_time" || "$current_time" <= "$stop_time" ]]; then
+                    time_ok="true"
                 else
-                    # Same day schedule
-                    if [[ $current_min -ge $start_min && $current_min -le $stop_min ]]; then
-                        time_ok="true"
-                    else
-                        time_ok="false"
-                    fi
+                    time_ok="false"
                 fi
-                echo "Time trigger: $time_ok (current: $current_time, window: $start_time-$stop_time)"
             else
-                echo "WARNING: Invalid time values - start: '$start_time', stop: '$stop_time', current: '$current_time'"
-                time_ok="false"
+                # Same day schedule
+                if [[ "$current_time" >= "$start_time" && "$current_time" <= "$stop_time" ]]; then
+                    time_ok="true"
+                else
+                    time_ok="false"
+                fi
             fi
+            echo "Time trigger: $time_ok (current: $current_time, window: $start_time-$stop_time)"
         fi
         
         # Check light trigger if enabled
         if [[ "$light_trigger_enabled" == "true" ]]; then
             light_level=$(get_light_level)
-            echo "Current light level: $light_level%, threshold: $light_threshold%, mode: $light_trigger_mode"
-            
-            # Validate light_level is numeric
-            if [[ "$light_level" =~ ^[0-9]+\.?[0-9]*$ ]]; then
-                if [[ "$light_trigger_mode" == "dark" ]]; then
-                    # Trigger when dark (light level below threshold)
-                    if (( $(echo "$light_level < $light_threshold" | bc -l) )); then
-                        light_ok="true"
-                    else
-                        light_ok="false"
-                    fi
+            if [[ "$light_trigger_mode" == "dark" ]]; then
+                if (( $(echo "$light_level < $light_threshold" | bc -l) )); then
+                    light_ok="true"
                 else
-                    # Trigger when bright (light level above threshold)
-                    if (( $(echo "$light_level > $light_threshold" | bc -l) )); then
-                        light_ok="true"
-                    else
-                        light_ok="false"
-                    fi
+                    light_ok="false"
                 fi
             else
-                echo "WARNING: Invalid light level '$light_level', assuming conditions not met"
-                light_ok="false"
+                if (( $(echo "$light_level > $light_threshold" | bc -l) )); then
+                    light_ok="true"
+                else
+                    light_ok="false"
+                fi
             fi
-            echo "Light trigger: $light_ok"
         fi
         
         # Make capture decision in main loop
