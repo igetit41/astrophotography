@@ -88,17 +88,22 @@ while true; do
             
             # Validate time values are not empty
             if [[ -n "$start_time" && -n "$stop_time" && -n "$current_time" ]]; then
+                # Convert times to minutes for proper comparison
+                current_min=$(( $(echo $current_time | cut -d: -f1) * 60 + $(echo $current_time | cut -d: -f2) ))
+                start_min=$(( $(echo $start_time | cut -d: -f1) * 60 + $(echo $start_time | cut -d: -f2) ))
+                stop_min=$(( $(echo $stop_time | cut -d: -f1) * 60 + $(echo $stop_time | cut -d: -f2) ))
+                
                 # Handle overnight periods (e.g., 20:00 to 06:00)
-                if [[ "$start_time" > "$stop_time" ]]; then
+                if [[ $start_min -gt $stop_min ]]; then
                     # Overnight schedule
-                    if [[ "$current_time" >= "$start_time" || "$current_time" <= "$stop_time" ]]; then
+                    if [[ $current_min -ge $start_min || $current_min -le $stop_min ]]; then
                         time_ok="true"
                     else
                         time_ok="false"
                     fi
                 else
                     # Same day schedule
-                    if [[ "$current_time" >= "$start_time" && "$current_time" <= "$stop_time" ]]; then
+                    if [[ $current_min -ge $start_min && $current_min -le $stop_min ]]; then
                         time_ok="true"
                     else
                         time_ok="false"
