@@ -1,1 +1,28 @@
+# Local machine config (bucket / profile settings) — copy from config.json.example
+config.json
+
+# Service account private key — never commit
 sa_key.json
+*-key.json
+*-credentials.json
+service-account-*.json
+
+# Local notes (may contain project IDs or live commands)
+*_notes.txt
+*notes*.txt
+
+# Editor / OS
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+*.bak
+*.backup
+*.log
+tmp/
+temp/
+.tmp/
